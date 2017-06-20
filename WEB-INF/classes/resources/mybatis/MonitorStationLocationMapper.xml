@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="monitor_station_location" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.monitorstation.bean.MonitorStationLocation" >
+    <id column="station_sid" property="stationSid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    station_sid, station_code, longitude, latitude
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from monitor_station_location
+    where station_sid = #{stationSid,jdbcType=INTEGER}
+  </select>
+  <select id="queryMonitorStationLocation" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from monitor_station_location msl where 1=1 
+    <if test="stationCode!=null">
+			and msl.station_code = #{stationCode}
+	</if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from monitor_station_location
+    where station_sid = #{stationSid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationLocation" >
+    insert into monitor_station_location (station_sid, station_code, longitude, 
+      latitude)
+    values (#{stationSid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationLocation" >
+    insert into monitor_station_location
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stationSid != null" >
+        station_sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stationSid != null" >
+        #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationLocation" >
+    update monitor_station_location
+    <set >
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where station_sid = #{stationSid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationLocation" >
+    update monitor_station_location
+    set station_code = #{stationCode,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR}
+    where station_sid = #{stationSid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="production_info" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.production.bean.ProductionInfo" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="station_sid" property="stationSid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="monitor_year" property="monitorYear" jdbcType="VARCHAR" />
+    <result column="plant_name" property="plantName" jdbcType="VARCHAR" />
+    <result column="plant_varieties" property="plantVarieties" jdbcType="VARCHAR" />
+    <result column="sowing_date" property="sowingDate" jdbcType="DATE" />
+    <result column="harvest_date" property="harvestDate" jdbcType="DATE" />
+    <result column="sowing_type" property="sowingType" jdbcType="VARCHAR" />
+    <result column="farming_info" property="farmingInfo" jdbcType="VARCHAR" />
+    <result column="rainfall" property="rainfall" jdbcType="REAL" />
+    <result column="irrigation_facilities" property="irrigationFacilities" jdbcType="VARCHAR" />
+    <result column="irrigation_mode" property="irrigationMode" jdbcType="VARCHAR" />
+    <result column="irrigation_num" property="irrigationNum" jdbcType="REAL" />
+    <result column="drainage_mode" property="drainageMode" jdbcType="VARCHAR" />
+    <result column="drainage_effect" property="drainageEffect" jdbcType="VARCHAR" />
+    <result column="natural_disaster_type" property="naturalDisasterType" jdbcType="VARCHAR" />
+    <result column="natural_disaster_time" property="naturalDisasterTime" jdbcType="TIMESTAMP" />
+    <result column="natural_disaster_degree" property="naturalDisasterDegree" jdbcType="VARCHAR" />
+    <result column="diseases_pests_type" property="diseasesPestsType" jdbcType="VARCHAR" />
+    <result column="diseases_pests_time" property="diseasesPestsTime" jdbcType="TIMESTAMP" />
+    <result column="diseases_pests_degree" property="diseasesPestsDegree" jdbcType="VARCHAR" />
+    <result column="diseases_pests_method" property="diseasesPestsMethod" jdbcType="VARCHAR" />
+    <result column="diseases_pests_effect" property="diseasesPestsEffect" jdbcType="VARCHAR" />
+    <result column="monitor_company" property="monitorCompany" jdbcType="VARCHAR" />
+    <result column="monitor_user_name" property="monitorUserName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tcxt.gss.production.bean.ProductionInfo" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, station_sid, station_code, monitor_year, plant_name, plant_varieties, sowing_date, 
+    harvest_date, sowing_type, farming_info, rainfall, irrigation_facilities, irrigation_mode, 
+    irrigation_num, drainage_mode, drainage_effect, natural_disaster_type, natural_disaster_time, 
+    natural_disaster_degree, diseases_pests_type, diseases_pests_time, diseases_pests_degree, 
+    diseases_pests_method, diseases_pests_effect, monitor_company, monitor_user_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="getProductionInfo" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from production_info
+    where station_sid = #{stationSid,jdbcType=INTEGER} and monitor_year = #{monitorYear,jdbcType=VARCHAR}
+  </select>
+  
+ <select id="queryProductionInfo" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from production_info
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from production_info
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tcxt.gss.production.bean.ProductionInfo" >
+    insert into production_info (sid, station_sid, station_code, 
+      monitor_year, plant_name, plant_varieties, 
+      sowing_date, harvest_date, sowing_type, 
+      farming_info, rainfall, irrigation_facilities, 
+      irrigation_mode, irrigation_num, drainage_mode, 
+      drainage_effect, natural_disaster_type, natural_disaster_time, 
+      natural_disaster_degree, diseases_pests_type, 
+      diseases_pests_time, diseases_pests_degree, 
+      diseases_pests_method, diseases_pests_effect, 
+      monitor_company, monitor_user_name, remark
+      )
+    values (#{sid,jdbcType=INTEGER}, #{stationSid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, 
+      #{monitorYear,jdbcType=VARCHAR}, #{plantName,jdbcType=VARCHAR}, #{plantVarieties,jdbcType=VARCHAR}, 
+      #{sowingDate,jdbcType=DATE}, #{harvestDate,jdbcType=DATE}, #{sowingType,jdbcType=VARCHAR}, 
+      #{farmingInfo,jdbcType=VARCHAR}, #{rainfall,jdbcType=REAL}, #{irrigationFacilities,jdbcType=VARCHAR}, 
+      #{irrigationMode,jdbcType=VARCHAR}, #{irrigationNum,jdbcType=REAL}, #{drainageMode,jdbcType=VARCHAR}, 
+      #{drainageEffect,jdbcType=VARCHAR}, #{naturalDisasterType,jdbcType=VARCHAR}, #{naturalDisasterTime,jdbcType=TIMESTAMP}, 
+      #{naturalDisasterDegree,jdbcType=VARCHAR}, #{diseasesPestsType,jdbcType=VARCHAR}, 
+      #{diseasesPestsTime,jdbcType=TIMESTAMP}, #{diseasesPestsDegree,jdbcType=VARCHAR}, 
+      #{diseasesPestsMethod,jdbcType=VARCHAR}, #{diseasesPestsEffect,jdbcType=VARCHAR}, 
+      #{monitorCompany,jdbcType=VARCHAR}, #{monitorUserName,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.production.bean.ProductionInfo" >
+    insert into production_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="stationSid != null" >
+        station_sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year,
+      </if>
+      <if test="plantName != null" >
+        plant_name,
+      </if>
+      <if test="plantVarieties != null" >
+        plant_varieties,
+      </if>
+      <if test="sowingDate != null" >
+        sowing_date,
+      </if>
+      <if test="harvestDate != null" >
+        harvest_date,
+      </if>
+      <if test="sowingType != null" >
+        sowing_type,
+      </if>
+      <if test="farmingInfo != null" >
+        farming_info,
+      </if>
+      <if test="rainfall != null" >
+        rainfall,
+      </if>
+      <if test="irrigationFacilities != null" >
+        irrigation_facilities,
+      </if>
+      <if test="irrigationMode != null" >
+        irrigation_mode,
+      </if>
+      <if test="irrigationNum != null" >
+        irrigation_num,
+      </if>
+      <if test="drainageMode != null" >
+        drainage_mode,
+      </if>
+      <if test="drainageEffect != null" >
+        drainage_effect,
+      </if>
+      <if test="naturalDisasterType != null" >
+        natural_disaster_type,
+      </if>
+      <if test="naturalDisasterTime != null" >
+        natural_disaster_time,
+      </if>
+      <if test="naturalDisasterDegree != null" >
+        natural_disaster_degree,
+      </if>
+      <if test="diseasesPestsType != null" >
+        diseases_pests_type,
+      </if>
+      <if test="diseasesPestsTime != null" >
+        diseases_pests_time,
+      </if>
+      <if test="diseasesPestsDegree != null" >
+        diseases_pests_degree,
+      </if>
+      <if test="diseasesPestsMethod != null" >
+        diseases_pests_method,
+      </if>
+      <if test="diseasesPestsEffect != null" >
+        diseases_pests_effect,
+      </if>
+      <if test="monitorCompany != null" >
+        monitor_company,
+      </if>
+      <if test="monitorUserName != null" >
+        monitor_user_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="stationSid != null" >
+        #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorYear != null" >
+        #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="plantName != null" >
+        #{plantName,jdbcType=VARCHAR},
+      </if>
+      <if test="plantVarieties != null" >
+        #{plantVarieties,jdbcType=VARCHAR},
+      </if>
+      <if test="sowingDate != null" >
+        #{sowingDate,jdbcType=DATE},
+      </if>
+      <if test="harvestDate != null" >
+        #{harvestDate,jdbcType=DATE},
+      </if>
+      <if test="sowingType != null" >
+        #{sowingType,jdbcType=VARCHAR},
+      </if>
+      <if test="farmingInfo != null" >
+        #{farmingInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="rainfall != null" >
+        #{rainfall,jdbcType=REAL},
+      </if>
+      <if test="irrigationFacilities != null" >
+        #{irrigationFacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="irrigationMode != null" >
+        #{irrigationMode,jdbcType=VARCHAR},
+      </if>
+      <if test="irrigationNum != null" >
+        #{irrigationNum,jdbcType=REAL},
+      </if>
+      <if test="drainageMode != null" >
+        #{drainageMode,jdbcType=VARCHAR},
+      </if>
+      <if test="drainageEffect != null" >
+        #{drainageEffect,jdbcType=VARCHAR},
+      </if>
+      <if test="naturalDisasterType != null" >
+        #{naturalDisasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="naturalDisasterTime != null" >
+        #{naturalDisasterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="naturalDisasterDegree != null" >
+        #{naturalDisasterDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsType != null" >
+        #{diseasesPestsType,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsTime != null" >
+        #{diseasesPestsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diseasesPestsDegree != null" >
+        #{diseasesPestsDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsMethod != null" >
+        #{diseasesPestsMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsEffect != null" >
+        #{diseasesPestsEffect,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorCompany != null" >
+        #{monitorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorUserName != null" >
+        #{monitorUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcxt.gss.production.bean.ProductionInfo" >
+    update production_info
+    <set >
+      <if test="stationSid != null" >
+        station_sid = #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="plantName != null" >
+        plant_name = #{plantName,jdbcType=VARCHAR},
+      </if>
+      <if test="plantVarieties != null" >
+        plant_varieties = #{plantVarieties,jdbcType=VARCHAR},
+      </if>
+      <if test="sowingDate != null" >
+        sowing_date = #{sowingDate,jdbcType=DATE},
+      </if>
+      <if test="harvestDate != null" >
+        harvest_date = #{harvestDate,jdbcType=DATE},
+      </if>
+      <if test="sowingType != null" >
+        sowing_type = #{sowingType,jdbcType=VARCHAR},
+      </if>
+      <if test="farmingInfo != null" >
+        farming_info = #{farmingInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="rainfall != null" >
+        rainfall = #{rainfall,jdbcType=REAL},
+      </if>
+      <if test="irrigationFacilities != null" >
+        irrigation_facilities = #{irrigationFacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="irrigationMode != null" >
+        irrigation_mode = #{irrigationMode,jdbcType=VARCHAR},
+      </if>
+      <if test="irrigationNum != null" >
+        irrigation_num = #{irrigationNum,jdbcType=REAL},
+      </if>
+      <if test="drainageMode != null" >
+        drainage_mode = #{drainageMode,jdbcType=VARCHAR},
+      </if>
+      <if test="drainageEffect != null" >
+        drainage_effect = #{drainageEffect,jdbcType=VARCHAR},
+      </if>
+      <if test="naturalDisasterType != null" >
+        natural_disaster_type = #{naturalDisasterType,jdbcType=VARCHAR},
+      </if>
+      <if test="naturalDisasterTime != null" >
+        natural_disaster_time = #{naturalDisasterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="naturalDisasterDegree != null" >
+        natural_disaster_degree = #{naturalDisasterDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsType != null" >
+        diseases_pests_type = #{diseasesPestsType,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsTime != null" >
+        diseases_pests_time = #{diseasesPestsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diseasesPestsDegree != null" >
+        diseases_pests_degree = #{diseasesPestsDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsMethod != null" >
+        diseases_pests_method = #{diseasesPestsMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasesPestsEffect != null" >
+        diseases_pests_effect = #{diseasesPestsEffect,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorCompany != null" >
+        monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorUserName != null" >
+        monitor_user_name = #{monitorUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcxt.gss.production.bean.ProductionInfo" >
+    update production_info
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      plant_name = #{plantName,jdbcType=VARCHAR},
+      plant_varieties = #{plantVarieties,jdbcType=VARCHAR},
+      sowing_date = #{sowingDate,jdbcType=DATE},
+      harvest_date = #{harvestDate,jdbcType=DATE},
+      sowing_type = #{sowingType,jdbcType=VARCHAR},
+      farming_info = #{farmingInfo,jdbcType=VARCHAR},
+      rainfall = #{rainfall,jdbcType=REAL},
+      irrigation_facilities = #{irrigationFacilities,jdbcType=VARCHAR},
+      irrigation_mode = #{irrigationMode,jdbcType=VARCHAR},
+      irrigation_num = #{irrigationNum,jdbcType=REAL},
+      drainage_mode = #{drainageMode,jdbcType=VARCHAR},
+      drainage_effect = #{drainageEffect,jdbcType=VARCHAR},
+      natural_disaster_type = #{naturalDisasterType,jdbcType=VARCHAR},
+      natural_disaster_time = #{naturalDisasterTime,jdbcType=TIMESTAMP},
+      natural_disaster_degree = #{naturalDisasterDegree,jdbcType=VARCHAR},
+      diseases_pests_type = #{diseasesPestsType,jdbcType=VARCHAR},
+      diseases_pests_time = #{diseasesPestsTime,jdbcType=TIMESTAMP},
+      diseases_pests_degree = #{diseasesPestsDegree,jdbcType=VARCHAR},
+      diseases_pests_method = #{diseasesPestsMethod,jdbcType=VARCHAR},
+      diseases_pests_effect = #{diseasesPestsEffect,jdbcType=VARCHAR},
+      monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      monitor_user_name = #{monitorUserName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcxt.gss.production.bean.ProductionInfo" >
+    update production_info
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      plant_name = #{plantName,jdbcType=VARCHAR},
+      plant_varieties = #{plantVarieties,jdbcType=VARCHAR},
+      sowing_date = #{sowingDate,jdbcType=DATE},
+      harvest_date = #{harvestDate,jdbcType=DATE},
+      sowing_type = #{sowingType,jdbcType=VARCHAR},
+      farming_info = #{farmingInfo,jdbcType=VARCHAR},
+      rainfall = #{rainfall,jdbcType=REAL},
+      irrigation_facilities = #{irrigationFacilities,jdbcType=VARCHAR},
+      irrigation_mode = #{irrigationMode,jdbcType=VARCHAR},
+      irrigation_num = #{irrigationNum,jdbcType=REAL},
+      drainage_mode = #{drainageMode,jdbcType=VARCHAR},
+      drainage_effect = #{drainageEffect,jdbcType=VARCHAR},
+      natural_disaster_type = #{naturalDisasterType,jdbcType=VARCHAR},
+      natural_disaster_time = #{naturalDisasterTime,jdbcType=TIMESTAMP},
+      natural_disaster_degree = #{naturalDisasterDegree,jdbcType=VARCHAR},
+      diseases_pests_type = #{diseasesPestsType,jdbcType=VARCHAR},
+      diseases_pests_time = #{diseasesPestsTime,jdbcType=TIMESTAMP},
+      diseases_pests_degree = #{diseasesPestsDegree,jdbcType=VARCHAR},
+      diseases_pests_method = #{diseasesPestsMethod,jdbcType=VARCHAR},
+      diseases_pests_effect = #{diseasesPestsEffect,jdbcType=VARCHAR},
+      monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      monitor_user_name = #{monitorUserName,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

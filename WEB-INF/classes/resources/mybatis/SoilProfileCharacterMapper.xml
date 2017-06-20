@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="soil_profile_character" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.soil.bean.SoilProfileCharacter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="station_sid" property="stationSid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="level_code" property="levelCode" jdbcType="VARCHAR" />
+    <result column="level_name" property="levelName" jdbcType="VARCHAR" />
+    <result column="level_depth" property="levelDepth" jdbcType="VARCHAR" />
+    <result column="profile_color" property="profileColor" jdbcType="VARCHAR" />
+    <result column="profile_structure" property="profileStructure" jdbcType="VARCHAR" />
+    <result column="profile_compactness" property="profileCompactness" jdbcType="VARCHAR" />
+    <result column="profile_bulkdensity" property="profileBulkdensity" jdbcType="REAL" />
+    <result column="profile_newborn" property="profileNewborn" jdbcType="VARCHAR" />
+    <result column="profile_plant_root" property="profilePlantRoot" jdbcType="VARCHAR" />
+    <result column="soil_grain_diameter_first" property="soilGrainDiameterFirst" jdbcType="REAL" />
+    <result column="soil_grain_diameter_second" property="soilGrainDiameterSecond" jdbcType="REAL" />
+    <result column="soil_grain_diameter_third" property="soilGrainDiameterThird" jdbcType="REAL" />
+    <result column="soil_grain_diameter_fourth" property="soilGrainDiameterFourth" jdbcType="REAL" />
+    <result column="texture_naming" property="textureNaming" jdbcType="VARCHAR" />
+    <result column="organic_matter_content" property="organicMatterContent" jdbcType="REAL" />
+    <result column="n_content" property="nContent" jdbcType="REAL" />
+    <result column="p_content" property="pContent" jdbcType="REAL" />
+    <result column="k_content" property="kContent" jdbcType="REAL" />
+    <result column="ph" property="ph" jdbcType="REAL" />
+    <result column="caco3_content" property="caco3Content" jdbcType="REAL" />
+    <result column="cation_content" property="cationContent" jdbcType="REAL" />
+    <result column="sampling_time" property="samplingTime" jdbcType="TIMESTAMP" />
+    <result column="testing_time" property="testingTime" jdbcType="TIMESTAMP" />
+    <result column="monitor_company" property="monitorCompany" jdbcType="VARCHAR" />
+    <result column="testing_company" property="testingCompany" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tcxt.gss.soil.bean.SoilProfileCharacter" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, station_sid, station_code, level_code, level_name, level_depth, profile_color, 
+    profile_structure, profile_compactness, profile_bulkdensity, profile_newborn, profile_plant_root, 
+    soil_grain_diameter_first, soil_grain_diameter_second, soil_grain_diameter_third, 
+    soil_grain_diameter_fourth, texture_naming, organic_matter_content, n_content, p_content, 
+    k_content, ph, caco3_content, cation_content, sampling_time, testing_time, monitor_company, 
+    testing_company
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from soil_profile_character
+    where station_sid = #{stationSid,jdbcType=INTEGER}
+  </select>
+  <select id="querySoilProfileCharacter" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from soil_profile_character
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from soil_profile_character
+    where station_sid = #{stationSid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tcxt.gss.soil.bean.SoilProfileCharacter" >
+    insert into soil_profile_character (id, station_sid, station_code, 
+      level_code, level_name, level_depth, 
+      profile_color, profile_structure, profile_compactness, 
+      profile_bulkdensity, profile_newborn, profile_plant_root, 
+      soil_grain_diameter_first, soil_grain_diameter_second, 
+      soil_grain_diameter_third, soil_grain_diameter_fourth, 
+      texture_naming, organic_matter_content, n_content, 
+      p_content, k_content, ph, caco3_content, 
+      cation_content, sampling_time, testing_time, 
+      monitor_company, testing_company, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{stationSid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, 
+      #{levelCode,jdbcType=VARCHAR}, #{levelName,jdbcType=VARCHAR}, #{levelDepth,jdbcType=VARCHAR}, 
+      #{profileColor,jdbcType=VARCHAR}, #{profileStructure,jdbcType=VARCHAR}, #{profileCompactness,jdbcType=VARCHAR}, 
+      #{profileBulkdensity,jdbcType=REAL}, #{profileNewborn,jdbcType=VARCHAR}, #{profilePlantRoot,jdbcType=VARCHAR}, 
+      #{soilGrainDiameterFirst,jdbcType=REAL}, #{soilGrainDiameterSecond,jdbcType=REAL}, 
+      #{soilGrainDiameterThird,jdbcType=REAL}, #{soilGrainDiameterFourth,jdbcType=REAL}, 
+      #{textureNaming,jdbcType=VARCHAR}, #{organicMatterContent,jdbcType=REAL}, #{nContent,jdbcType=REAL}, 
+      #{pContent,jdbcType=REAL}, #{kContent,jdbcType=REAL}, #{ph,jdbcType=REAL}, #{caco3Content,jdbcType=REAL}, 
+      #{cationContent,jdbcType=REAL}, #{samplingTime,jdbcType=TIMESTAMP}, #{testingTime,jdbcType=TIMESTAMP}, 
+      #{monitorCompany,jdbcType=VARCHAR}, #{testingCompany,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.soil.bean.SoilProfileCharacter" >
+    insert into soil_profile_character
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationSid != null" >
+        station_sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="levelCode != null" >
+        level_code,
+      </if>
+      <if test="levelName != null" >
+        level_name,
+      </if>
+      <if test="levelDepth != null" >
+        level_depth,
+      </if>
+      <if test="profileColor != null" >
+        profile_color,
+      </if>
+      <if test="profileStructure != null" >
+        profile_structure,
+      </if>
+      <if test="profileCompactness != null" >
+        profile_compactness,
+      </if>
+      <if test="profileBulkdensity != null" >
+        profile_bulkdensity,
+      </if>
+      <if test="profileNewborn != null" >
+        profile_newborn,
+      </if>
+      <if test="profilePlantRoot != null" >
+        profile_plant_root,
+      </if>
+      <if test="soilGrainDiameterFirst != null" >
+        soil_grain_diameter_first,
+      </if>
+      <if test="soilGrainDiameterSecond != null" >
+        soil_grain_diameter_second,
+      </if>
+      <if test="soilGrainDiameterThird != null" >
+        soil_grain_diameter_third,
+      </if>
+      <if test="soilGrainDiameterFourth != null" >
+        soil_grain_diameter_fourth,
+      </if>
+      <if test="textureNaming != null" >
+        texture_naming,
+      </if>
+      <if test="organicMatterContent != null" >
+        organic_matter_content,
+      </if>
+      <if test="nContent != null" >
+        n_content,
+      </if>
+      <if test="pContent != null" >
+        p_content,
+      </if>
+      <if test="kContent != null" >
+        k_content,
+      </if>
+      <if test="ph != null" >
+        ph,
+      </if>
+      <if test="caco3Content != null" >
+        caco3_content,
+      </if>
+      <if test="cationContent != null" >
+        cation_content,
+      </if>
+      <if test="samplingTime != null" >
+        sampling_time,
+      </if>
+      <if test="testingTime != null" >
+        testing_time,
+      </if>
+      <if test="monitorCompany != null" >
+        monitor_company,
+      </if>
+      <if test="testingCompany != null" >
+        testing_company,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stationSid != null" >
+        #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="levelCode != null" >
+        #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="levelName != null" >
+        #{levelName,jdbcType=VARCHAR},
+      </if>
+      <if test="levelDepth != null" >
+        #{levelDepth,jdbcType=VARCHAR},
+      </if>
+      <if test="profileColor != null" >
+        #{profileColor,jdbcType=VARCHAR},
+      </if>
+      <if test="profileStructure != null" >
+        #{profileStructure,jdbcType=VARCHAR},
+      </if>
+      <if test="profileCompactness != null" >
+        #{profileCompactness,jdbcType=VARCHAR},
+      </if>
+      <if test="profileBulkdensity != null" >
+        #{profileBulkdensity,jdbcType=REAL},
+      </if>
+      <if test="profileNewborn != null" >
+        #{profileNewborn,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePlantRoot != null" >
+        #{profilePlantRoot,jdbcType=VARCHAR},
+      </if>
+      <if test="soilGrainDiameterFirst != null" >
+        #{soilGrainDiameterFirst,jdbcType=REAL},
+      </if>
+      <if test="soilGrainDiameterSecond != null" >
+        #{soilGrainDiameterSecond,jdbcType=REAL},
+      </if>
+      <if test="soilGrainDiameterThird != null" >
+        #{soilGrainDiameterThird,jdbcType=REAL},
+      </if>
+      <if test="soilGrainDiameterFourth != null" >
+        #{soilGrainDiameterFourth,jdbcType=REAL},
+      </if>
+      <if test="textureNaming != null" >
+        #{textureNaming,jdbcType=VARCHAR},
+      </if>
+      <if test="organicMatterContent != null" >
+        #{organicMatterContent,jdbcType=REAL},
+      </if>
+      <if test="nContent != null" >
+        #{nContent,jdbcType=REAL},
+      </if>
+      <if test="pContent != null" >
+        #{pContent,jdbcType=REAL},
+      </if>
+      <if test="kContent != null" >
+        #{kContent,jdbcType=REAL},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=REAL},
+      </if>
+      <if test="caco3Content != null" >
+        #{caco3Content,jdbcType=REAL},
+      </if>
+      <if test="cationContent != null" >
+        #{cationContent,jdbcType=REAL},
+      </if>
+      <if test="samplingTime != null" >
+        #{samplingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testingTime != null" >
+        #{testingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorCompany != null" >
+        #{monitorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="testingCompany != null" >
+        #{testingCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcxt.gss.soil.bean.SoilProfileCharacter" >
+    update soil_profile_character
+    <set >
+      <if test="stationSid != null" >
+        station_sid = #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="levelCode != null" >
+        level_code = #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="levelName != null" >
+        level_name = #{levelName,jdbcType=VARCHAR},
+      </if>
+      <if test="levelDepth != null" >
+        level_depth = #{levelDepth,jdbcType=VARCHAR},
+      </if>
+      <if test="profileColor != null" >
+        profile_color = #{profileColor,jdbcType=VARCHAR},
+      </if>
+      <if test="profileStructure != null" >
+        profile_structure = #{profileStructure,jdbcType=VARCHAR},
+      </if>
+      <if test="profileCompactness != null" >
+        profile_compactness = #{profileCompactness,jdbcType=VARCHAR},
+      </if>
+      <if test="profileBulkdensity != null" >
+        profile_bulkdensity = #{profileBulkdensity,jdbcType=REAL},
+      </if>
+      <if test="profileNewborn != null" >
+        profile_newborn = #{profileNewborn,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePlantRoot != null" >
+        profile_plant_root = #{profilePlantRoot,jdbcType=VARCHAR},
+      </if>
+      <if test="soilGrainDiameterFirst != null" >
+        soil_grain_diameter_first = #{soilGrainDiameterFirst,jdbcType=REAL},
+      </if>
+      <if test="soilGrainDiameterSecond != null" >
+        soil_grain_diameter_second = #{soilGrainDiameterSecond,jdbcType=REAL},
+      </if>
+      <if test="soilGrainDiameterThird != null" >
+        soil_grain_diameter_third = #{soilGrainDiameterThird,jdbcType=REAL},
+      </if>
+      <if test="soilGrainDiameterFourth != null" >
+        soil_grain_diameter_fourth = #{soilGrainDiameterFourth,jdbcType=REAL},
+      </if>
+      <if test="textureNaming != null" >
+        texture_naming = #{textureNaming,jdbcType=VARCHAR},
+      </if>
+      <if test="organicMatterContent != null" >
+        organic_matter_content = #{organicMatterContent,jdbcType=REAL},
+      </if>
+      <if test="nContent != null" >
+        n_content = #{nContent,jdbcType=REAL},
+      </if>
+      <if test="pContent != null" >
+        p_content = #{pContent,jdbcType=REAL},
+      </if>
+      <if test="kContent != null" >
+        k_content = #{kContent,jdbcType=REAL},
+      </if>
+      <if test="ph != null" >
+        ph = #{ph,jdbcType=REAL},
+      </if>
+      <if test="caco3Content != null" >
+        caco3_content = #{caco3Content,jdbcType=REAL},
+      </if>
+      <if test="cationContent != null" >
+        cation_content = #{cationContent,jdbcType=REAL},
+      </if>
+      <if test="samplingTime != null" >
+        sampling_time = #{samplingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testingTime != null" >
+        testing_time = #{testingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorCompany != null" >
+        monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="testingCompany != null" >
+        testing_company = #{testingCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcxt.gss.soil.bean.SoilProfileCharacter" >
+    update soil_profile_character
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      level_code = #{levelCode,jdbcType=VARCHAR},
+      level_name = #{levelName,jdbcType=VARCHAR},
+      level_depth = #{levelDepth,jdbcType=VARCHAR},
+      profile_color = #{profileColor,jdbcType=VARCHAR},
+      profile_structure = #{profileStructure,jdbcType=VARCHAR},
+      profile_compactness = #{profileCompactness,jdbcType=VARCHAR},
+      profile_bulkdensity = #{profileBulkdensity,jdbcType=REAL},
+      profile_newborn = #{profileNewborn,jdbcType=VARCHAR},
+      profile_plant_root = #{profilePlantRoot,jdbcType=VARCHAR},
+      soil_grain_diameter_first = #{soilGrainDiameterFirst,jdbcType=REAL},
+      soil_grain_diameter_second = #{soilGrainDiameterSecond,jdbcType=REAL},
+      soil_grain_diameter_third = #{soilGrainDiameterThird,jdbcType=REAL},
+      soil_grain_diameter_fourth = #{soilGrainDiameterFourth,jdbcType=REAL},
+      texture_naming = #{textureNaming,jdbcType=VARCHAR},
+      organic_matter_content = #{organicMatterContent,jdbcType=REAL},
+      n_content = #{nContent,jdbcType=REAL},
+      p_content = #{pContent,jdbcType=REAL},
+      k_content = #{kContent,jdbcType=REAL},
+      ph = #{ph,jdbcType=REAL},
+      caco3_content = #{caco3Content,jdbcType=REAL},
+      cation_content = #{cationContent,jdbcType=REAL},
+      sampling_time = #{samplingTime,jdbcType=TIMESTAMP},
+      testing_time = #{testingTime,jdbcType=TIMESTAMP},
+      monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      testing_company = #{testingCompany,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcxt.gss.soil.bean.SoilProfileCharacter" >
+    update soil_profile_character
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      level_code = #{levelCode,jdbcType=VARCHAR},
+      level_name = #{levelName,jdbcType=VARCHAR},
+      level_depth = #{levelDepth,jdbcType=VARCHAR},
+      profile_color = #{profileColor,jdbcType=VARCHAR},
+      profile_structure = #{profileStructure,jdbcType=VARCHAR},
+      profile_compactness = #{profileCompactness,jdbcType=VARCHAR},
+      profile_bulkdensity = #{profileBulkdensity,jdbcType=REAL},
+      profile_newborn = #{profileNewborn,jdbcType=VARCHAR},
+      profile_plant_root = #{profilePlantRoot,jdbcType=VARCHAR},
+      soil_grain_diameter_first = #{soilGrainDiameterFirst,jdbcType=REAL},
+      soil_grain_diameter_second = #{soilGrainDiameterSecond,jdbcType=REAL},
+      soil_grain_diameter_third = #{soilGrainDiameterThird,jdbcType=REAL},
+      soil_grain_diameter_fourth = #{soilGrainDiameterFourth,jdbcType=REAL},
+      texture_naming = #{textureNaming,jdbcType=VARCHAR},
+      organic_matter_content = #{organicMatterContent,jdbcType=REAL},
+      n_content = #{nContent,jdbcType=REAL},
+      p_content = #{pContent,jdbcType=REAL},
+      k_content = #{kContent,jdbcType=REAL},
+      ph = #{ph,jdbcType=REAL},
+      caco3_content = #{caco3Content,jdbcType=REAL},
+      cation_content = #{cationContent,jdbcType=REAL},
+      sampling_time = #{samplingTime,jdbcType=TIMESTAMP},
+      testing_time = #{testingTime,jdbcType=TIMESTAMP},
+      monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      testing_company = #{testingCompany,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

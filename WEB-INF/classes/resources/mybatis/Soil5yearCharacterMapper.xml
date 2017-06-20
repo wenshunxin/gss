@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="soil_5year_character" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.soil.bean.Soil5yearCharacter" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="station_sid" property="stationSid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="testing_start_date" property="testingStartDate" jdbcType="DATE" />
+    <result column="testing_end_date" property="testingEndDate" jdbcType="DATE" />
+    <result column="monitor_year" property="monitorYear" jdbcType="VARCHAR" />
+    <result column="sampling_address" property="samplingAddress" jdbcType="VARCHAR" />
+    <result column="sampling_date" property="samplingDate" jdbcType="TIMESTAMP" />
+    <result column="deal_type" property="dealType" jdbcType="INTEGER" />
+    <result column="texture" property="texture" jdbcType="VARCHAR" />
+    <result column="salinity" property="salinity" jdbcType="REAL" />
+    <result column="cec" property="cec" jdbcType="REAL" />
+    <result column="exchangeable_ca" property="exchangeableCa" jdbcType="REAL" />
+    <result column="exchangeable_mg" property="exchangeableMg" jdbcType="REAL" />
+    <result column="effective_s" property="effectiveS" jdbcType="REAL" />
+    <result column="effective_si" property="effectiveSi" jdbcType="REAL" />
+    <result column="p_content" property="pContent" jdbcType="REAL" />
+    <result column="k_content" property="kContent" jdbcType="REAL" />
+    <result column="fe_content" property="feContent" jdbcType="REAL" />
+    <result column="mn_content" property="mnContent" jdbcType="REAL" />
+    <result column="cu_content" property="cuContent" jdbcType="REAL" />
+    <result column="zn_content" property="znContent" jdbcType="REAL" />
+    <result column="b_content" property="bContent" jdbcType="REAL" />
+    <result column="mo_content" property="moContent" jdbcType="REAL" />
+    <result column="cr_content" property="crContent" jdbcType="REAL" />
+    <result column="cd_content" property="cdContent" jdbcType="REAL" />
+    <result column="pb_content" property="pbContent" jdbcType="REAL" />
+    <result column="as_content" property="asContent" jdbcType="REAL" />
+    <result column="hg_content" property="hgContent" jdbcType="REAL" />
+    <result column="sn_content" property="snContent" jdbcType="REAL" />
+    <result column="approval_user_name" property="approvalUserName" jdbcType="VARCHAR" />
+    <result column="approval_date" property="approvalDate" jdbcType="DATE" />
+    <result column="examine_user_name" property="examineUserName" jdbcType="VARCHAR" />
+    <result column="examine_date" property="examineDate" jdbcType="DATE" />
+    <result column="formation_user_name" property="formationUserName" jdbcType="VARCHAR" />
+    <result column="formation_date" property="formationDate" jdbcType="DATE" />
+    <result column="test_company" property="testCompany" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tcxt.gss.soil.bean.Soil5yearCharacter" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, station_sid, station_code, testing_start_date, testing_end_date, monitor_year, 
+    sampling_address, sampling_date, deal_type, texture, salinity, cec, exchangeable_ca, 
+    exchangeable_mg, effective_s, effective_si, p_content, k_content, fe_content, mn_content, 
+    cu_content, zn_content, b_content, mo_content, cr_content, cd_content, pb_content, 
+    as_content, hg_content, sn_content, approval_user_name, approval_date, examine_user_name, 
+    examine_date, formation_user_name, formation_date, test_company
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+ <select id="getSoil5yearCharacter" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from soil_5year_character
+    where station_sid = #{stationSid,jdbcType=INTEGER} and monitor_year = #{monitorYear,jdbcType=VARCHAR}
+  </select>
+  <select id="querySoil5yearCharacter" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from soil_5year_character
+  </select>
+  
+   <select id="getDatasByFieldFor5year" resultType="hashMap" parameterType="java.util.HashMap" >
+   select monitor_year,${fieldName} from soil_5year_character where station_sid = #{stationSid,jdbcType=INTEGER} group by deal_type,monitor_year
+  </select>
+  
+  <delete id="deleteSoil5yearCharacter" parameterType="java.util.HashMap" >
+    delete from soil_5year_character
+   where station_sid = #{stationSid,jdbcType=INTEGER} and monitor_year = #{monitorYear,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tcxt.gss.soil.bean.Soil5yearCharacter" >
+    insert into soil_5year_character (sid, station_sid, station_code, 
+      testing_start_date, testing_end_date, monitor_year, 
+      sampling_address, sampling_date, deal_type, 
+      texture, salinity, cec, exchangeable_ca, 
+      exchangeable_mg, effective_s, effective_si, 
+      p_content, k_content, fe_content, 
+      mn_content, cu_content, zn_content, 
+      b_content, mo_content, cr_content, 
+      cd_content, pb_content, as_content, 
+      hg_content, sn_content, approval_user_name, 
+      approval_date, examine_user_name, examine_date, 
+      formation_user_name, formation_date, test_company, 
+      remark)
+    values (#{sid,jdbcType=INTEGER}, #{stationSid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, 
+      #{testingStartDate,jdbcType=DATE}, #{testingEndDate,jdbcType=DATE}, #{monitorYear,jdbcType=VARCHAR}, 
+      #{samplingAddress,jdbcType=VARCHAR}, #{samplingDate,jdbcType=TIMESTAMP}, #{dealType,jdbcType=INTEGER}, 
+      #{texture,jdbcType=VARCHAR}, #{salinity,jdbcType=REAL}, #{cec,jdbcType=REAL}, #{exchangeableCa,jdbcType=REAL}, 
+      #{exchangeableMg,jdbcType=REAL}, #{effectiveS,jdbcType=REAL}, #{effectiveSi,jdbcType=REAL}, 
+      #{pContent,jdbcType=REAL}, #{kContent,jdbcType=REAL}, #{feContent,jdbcType=REAL}, 
+      #{mnContent,jdbcType=REAL}, #{cuContent,jdbcType=REAL}, #{znContent,jdbcType=REAL}, 
+      #{bContent,jdbcType=REAL}, #{moContent,jdbcType=REAL}, #{crContent,jdbcType=REAL}, 
+      #{cdContent,jdbcType=REAL}, #{pbContent,jdbcType=REAL}, #{asContent,jdbcType=REAL}, 
+      #{hgContent,jdbcType=REAL}, #{snContent,jdbcType=REAL}, #{approvalUserName,jdbcType=VARCHAR}, 
+      #{approvalDate,jdbcType=DATE}, #{examineUserName,jdbcType=VARCHAR}, #{examineDate,jdbcType=DATE}, 
+      #{formationUserName,jdbcType=VARCHAR}, #{formationDate,jdbcType=DATE}, #{testCompany,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.soil.bean.Soil5yearCharacter" >
+    insert into soil_5year_character
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="stationSid != null" >
+        station_sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="testingStartDate != null" >
+        testing_start_date,
+      </if>
+      <if test="testingEndDate != null" >
+        testing_end_date,
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year,
+      </if>
+      <if test="samplingAddress != null" >
+        sampling_address,
+      </if>
+      <if test="samplingDate != null" >
+        sampling_date,
+      </if>
+      <if test="dealType != null" >
+        deal_type,
+      </if>
+      <if test="texture != null" >
+        texture,
+      </if>
+      <if test="salinity != null" >
+        salinity,
+      </if>
+      <if test="cec != null" >
+        cec,
+      </if>
+      <if test="exchangeableCa != null" >
+        exchangeable_ca,
+      </if>
+      <if test="exchangeableMg != null" >
+        exchangeable_mg,
+      </if>
+      <if test="effectiveS != null" >
+        effective_s,
+      </if>
+      <if test="effectiveSi != null" >
+        effective_si,
+      </if>
+      <if test="pContent != null" >
+        p_content,
+      </if>
+      <if test="kContent != null" >
+        k_content,
+      </if>
+      <if test="feContent != null" >
+        fe_content,
+      </if>
+      <if test="mnContent != null" >
+        mn_content,
+      </if>
+      <if test="cuContent != null" >
+        cu_content,
+      </if>
+      <if test="znContent != null" >
+        zn_content,
+      </if>
+      <if test="bContent != null" >
+        b_content,
+      </if>
+      <if test="moContent != null" >
+        mo_content,
+      </if>
+      <if test="crContent != null" >
+        cr_content,
+      </if>
+      <if test="cdContent != null" >
+        cd_content,
+      </if>
+      <if test="pbContent != null" >
+        pb_content,
+      </if>
+      <if test="asContent != null" >
+        as_content,
+      </if>
+      <if test="hgContent != null" >
+        hg_content,
+      </if>
+      <if test="snContent != null" >
+        sn_content,
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name,
+      </if>
+      <if test="approvalDate != null" >
+        approval_date,
+      </if>
+      <if test="examineUserName != null" >
+        examine_user_name,
+      </if>
+      <if test="examineDate != null" >
+        examine_date,
+      </if>
+      <if test="formationUserName != null" >
+        formation_user_name,
+      </if>
+      <if test="formationDate != null" >
+        formation_date,
+      </if>
+      <if test="testCompany != null" >
+        test_company,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="stationSid != null" >
+        #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="testingStartDate != null" >
+        #{testingStartDate,jdbcType=DATE},
+      </if>
+      <if test="testingEndDate != null" >
+        #{testingEndDate,jdbcType=DATE},
+      </if>
+      <if test="monitorYear != null" >
+        #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingAddress != null" >
+        #{samplingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingDate != null" >
+        #{samplingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealType != null" >
+        #{dealType,jdbcType=INTEGER},
+      </if>
+      <if test="texture != null" >
+        #{texture,jdbcType=VARCHAR},
+      </if>
+      <if test="salinity != null" >
+        #{salinity,jdbcType=REAL},
+      </if>
+      <if test="cec != null" >
+        #{cec,jdbcType=REAL},
+      </if>
+      <if test="exchangeableCa != null" >
+        #{exchangeableCa,jdbcType=REAL},
+      </if>
+      <if test="exchangeableMg != null" >
+        #{exchangeableMg,jdbcType=REAL},
+      </if>
+      <if test="effectiveS != null" >
+        #{effectiveS,jdbcType=REAL},
+      </if>
+      <if test="effectiveSi != null" >
+        #{effectiveSi,jdbcType=REAL},
+      </if>
+      <if test="pContent != null" >
+        #{pContent,jdbcType=REAL},
+      </if>
+      <if test="kContent != null" >
+        #{kContent,jdbcType=REAL},
+      </if>
+      <if test="feContent != null" >
+        #{feContent,jdbcType=REAL},
+      </if>
+      <if test="mnContent != null" >
+        #{mnContent,jdbcType=REAL},
+      </if>
+      <if test="cuContent != null" >
+        #{cuContent,jdbcType=REAL},
+      </if>
+      <if test="znContent != null" >
+        #{znContent,jdbcType=REAL},
+      </if>
+      <if test="bContent != null" >
+        #{bContent,jdbcType=REAL},
+      </if>
+      <if test="moContent != null" >
+        #{moContent,jdbcType=REAL},
+      </if>
+      <if test="crContent != null" >
+        #{crContent,jdbcType=REAL},
+      </if>
+      <if test="cdContent != null" >
+        #{cdContent,jdbcType=REAL},
+      </if>
+      <if test="pbContent != null" >
+        #{pbContent,jdbcType=REAL},
+      </if>
+      <if test="asContent != null" >
+        #{asContent,jdbcType=REAL},
+      </if>
+      <if test="hgContent != null" >
+        #{hgContent,jdbcType=REAL},
+      </if>
+      <if test="snContent != null" >
+        #{snContent,jdbcType=REAL},
+      </if>
+      <if test="approvalUserName != null" >
+        #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null" >
+        #{approvalDate,jdbcType=DATE},
+      </if>
+      <if test="examineUserName != null" >
+        #{examineUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="examineDate != null" >
+        #{examineDate,jdbcType=DATE},
+      </if>
+      <if test="formationUserName != null" >
+        #{formationUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="formationDate != null" >
+        #{formationDate,jdbcType=DATE},
+      </if>
+      <if test="testCompany != null" >
+        #{testCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcxt.gss.soil.bean.Soil5yearCharacter" >
+    update soil_5year_character
+    <set >
+      <if test="stationSid != null" >
+        station_sid = #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="testingStartDate != null" >
+        testing_start_date = #{testingStartDate,jdbcType=DATE},
+      </if>
+      <if test="testingEndDate != null" >
+        testing_end_date = #{testingEndDate,jdbcType=DATE},
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingAddress != null" >
+        sampling_address = #{samplingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingDate != null" >
+        sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealType != null" >
+        deal_type = #{dealType,jdbcType=INTEGER},
+      </if>
+      <if test="texture != null" >
+        texture = #{texture,jdbcType=VARCHAR},
+      </if>
+      <if test="salinity != null" >
+        salinity = #{salinity,jdbcType=REAL},
+      </if>
+      <if test="cec != null" >
+        cec = #{cec,jdbcType=REAL},
+      </if>
+      <if test="exchangeableCa != null" >
+        exchangeable_ca = #{exchangeableCa,jdbcType=REAL},
+      </if>
+      <if test="exchangeableMg != null" >
+        exchangeable_mg = #{exchangeableMg,jdbcType=REAL},
+      </if>
+      <if test="effectiveS != null" >
+        effective_s = #{effectiveS,jdbcType=REAL},
+      </if>
+      <if test="effectiveSi != null" >
+        effective_si = #{effectiveSi,jdbcType=REAL},
+      </if>
+      <if test="pContent != null" >
+        p_content = #{pContent,jdbcType=REAL},
+      </if>
+      <if test="kContent != null" >
+        k_content = #{kContent,jdbcType=REAL},
+      </if>
+      <if test="feContent != null" >
+        fe_content = #{feContent,jdbcType=REAL},
+      </if>
+      <if test="mnContent != null" >
+        mn_content = #{mnContent,jdbcType=REAL},
+      </if>
+      <if test="cuContent != null" >
+        cu_content = #{cuContent,jdbcType=REAL},
+      </if>
+      <if test="znContent != null" >
+        zn_content = #{znContent,jdbcType=REAL},
+      </if>
+      <if test="bContent != null" >
+        b_content = #{bContent,jdbcType=REAL},
+      </if>
+      <if test="moContent != null" >
+        mo_content = #{moContent,jdbcType=REAL},
+      </if>
+      <if test="crContent != null" >
+        cr_content = #{crContent,jdbcType=REAL},
+      </if>
+      <if test="cdContent != null" >
+        cd_content = #{cdContent,jdbcType=REAL},
+      </if>
+      <if test="pbContent != null" >
+        pb_content = #{pbContent,jdbcType=REAL},
+      </if>
+      <if test="asContent != null" >
+        as_content = #{asContent,jdbcType=REAL},
+      </if>
+      <if test="hgContent != null" >
+        hg_content = #{hgContent,jdbcType=REAL},
+      </if>
+      <if test="snContent != null" >
+        sn_content = #{snContent,jdbcType=REAL},
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null" >
+        approval_date = #{approvalDate,jdbcType=DATE},
+      </if>
+      <if test="examineUserName != null" >
+        examine_user_name = #{examineUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="examineDate != null" >
+        examine_date = #{examineDate,jdbcType=DATE},
+      </if>
+      <if test="formationUserName != null" >
+        formation_user_name = #{formationUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="formationDate != null" >
+        formation_date = #{formationDate,jdbcType=DATE},
+      </if>
+      <if test="testCompany != null" >
+        test_company = #{testCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcxt.gss.soil.bean.Soil5yearCharacter" >
+    update soil_5year_character
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      testing_start_date = #{testingStartDate,jdbcType=DATE},
+      testing_end_date = #{testingEndDate,jdbcType=DATE},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      sampling_address = #{samplingAddress,jdbcType=VARCHAR},
+      sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      deal_type = #{dealType,jdbcType=INTEGER},
+      texture = #{texture,jdbcType=VARCHAR},
+      salinity = #{salinity,jdbcType=REAL},
+      cec = #{cec,jdbcType=REAL},
+      exchangeable_ca = #{exchangeableCa,jdbcType=REAL},
+      exchangeable_mg = #{exchangeableMg,jdbcType=REAL},
+      effective_s = #{effectiveS,jdbcType=REAL},
+      effective_si = #{effectiveSi,jdbcType=REAL},
+      p_content = #{pContent,jdbcType=REAL},
+      k_content = #{kContent,jdbcType=REAL},
+      fe_content = #{feContent,jdbcType=REAL},
+      mn_content = #{mnContent,jdbcType=REAL},
+      cu_content = #{cuContent,jdbcType=REAL},
+      zn_content = #{znContent,jdbcType=REAL},
+      b_content = #{bContent,jdbcType=REAL},
+      mo_content = #{moContent,jdbcType=REAL},
+      cr_content = #{crContent,jdbcType=REAL},
+      cd_content = #{cdContent,jdbcType=REAL},
+      pb_content = #{pbContent,jdbcType=REAL},
+      as_content = #{asContent,jdbcType=REAL},
+      hg_content = #{hgContent,jdbcType=REAL},
+      sn_content = #{snContent,jdbcType=REAL},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=DATE},
+      examine_user_name = #{examineUserName,jdbcType=VARCHAR},
+      examine_date = #{examineDate,jdbcType=DATE},
+      formation_user_name = #{formationUserName,jdbcType=VARCHAR},
+      formation_date = #{formationDate,jdbcType=DATE},
+      test_company = #{testCompany,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcxt.gss.soil.bean.Soil5yearCharacter" >
+    update soil_5year_character
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      testing_start_date = #{testingStartDate,jdbcType=DATE},
+      testing_end_date = #{testingEndDate,jdbcType=DATE},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      sampling_address = #{samplingAddress,jdbcType=VARCHAR},
+      sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      deal_type = #{dealType,jdbcType=INTEGER},
+      texture = #{texture,jdbcType=VARCHAR},
+      salinity = #{salinity,jdbcType=REAL},
+      cec = #{cec,jdbcType=REAL},
+      exchangeable_ca = #{exchangeableCa,jdbcType=REAL},
+      exchangeable_mg = #{exchangeableMg,jdbcType=REAL},
+      effective_s = #{effectiveS,jdbcType=REAL},
+      effective_si = #{effectiveSi,jdbcType=REAL},
+      p_content = #{pContent,jdbcType=REAL},
+      k_content = #{kContent,jdbcType=REAL},
+      fe_content = #{feContent,jdbcType=REAL},
+      mn_content = #{mnContent,jdbcType=REAL},
+      cu_content = #{cuContent,jdbcType=REAL},
+      zn_content = #{znContent,jdbcType=REAL},
+      b_content = #{bContent,jdbcType=REAL},
+      mo_content = #{moContent,jdbcType=REAL},
+      cr_content = #{crContent,jdbcType=REAL},
+      cd_content = #{cdContent,jdbcType=REAL},
+      pb_content = #{pbContent,jdbcType=REAL},
+      as_content = #{asContent,jdbcType=REAL},
+      hg_content = #{hgContent,jdbcType=REAL},
+      sn_content = #{snContent,jdbcType=REAL},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=DATE},
+      examine_user_name = #{examineUserName,jdbcType=VARCHAR},
+      examine_date = #{examineDate,jdbcType=DATE},
+      formation_user_name = #{formationUserName,jdbcType=VARCHAR},
+      formation_date = #{formationDate,jdbcType=DATE},
+      test_company = #{testCompany,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

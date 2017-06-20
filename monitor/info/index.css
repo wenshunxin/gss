@@ -1,0 +1,167 @@
+*{
+    padding:0;
+    margin:0;
+}
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+body{
+    font: normal 14px verdana;
+    color:#333;
+}
+table{
+    width:100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+td{
+    text-align:center;
+    border:1px solid #DDDAD5;
+    height: 40px;
+}
+ul,li{
+    list-style:none;
+}
+input{
+    width: 100%;
+    width: calc(100% - 20px);
+    height:100%;
+    border:none;
+    outline:none;
+    text-align: center;
+    padding:0 10px;
+}
+dl,ul,li,dt,dd{
+    font-weight: normal;
+}
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand {
+    display: none;
+}
+#base-div{
+    width:94%;
+    height: 100%;
+    margin:auto;
+}
+#top-div{
+    height:50px;
+    font-size: 20px;
+}
+#top-div a{
+    height: 50px;
+    line-height: 50px;
+}
+#middle-div{
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+#middle-div .combo{
+    width:100% !important;
+}
+#middle-div .combo-text{
+    width: 98% ;
+    width: calc(100% - 24px) !important;
+}
+#middle-div .panel{
+    width: 100% !important;
+}
+#middle-div .combo-arrow{
+    background: url('../../resource/easyui/themes/metro/images/xiala.png') no-repeat center center !important;
+}
+#middle-div select{
+    width: 100%;
+    height:30px;
+    padding:0 10px;
+    border: solid 1px #ccc;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: url("../../resource/easyui/themes/metro/images/xiala.png") no-repeat scroll 99% center transparent;
+}
+#bottom-div{
+    height: calc(100% - 100px);
+    /*overflow-y: scroll;*/
+}
+#creat-ponits, #creat-ponits-1{
+    height: 30px;
+    margin-top:10px;
+    margin-bottom: 20px;
+}
+#creat-ponits dt, #creat-ponits dd, #creat-ponits-1 dt, #creat-ponits-1 dd{
+    height: 24px;
+    line-height: 24px;
+}
+#creat-ponits dt, #creat-ponits-1 dt{
+    width: 110px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+}
+#creat-ponits dd, #creat-ponits-1 dd{
+    width:80%;
+    width: -moz-calc(100% - 110px);
+    width: -webkit-calc(100% - 110px);
+    width: calc(100% - 110px);
+}
+#creat-ponits dd input, #creat-ponits-1 dd input{
+    width: calc(100% - 40px);
+    outline: none;
+}
+#creat-ponits dl{
+    width:40%;
+    margin-left: 5%;
+    float: left;
+    display: inline-block;
+}
+#creat-ponits-1 dl{
+    width:40%;
+    display: block;
+    margin: 0 auto;
+}
+#time-and-company *{
+    height:24px;
+    line-height: 24px;
+}
+#time-and-company ul{
+    width: 100%;
+}
+#time-and-company ul li{
+    width: 50%;
+    float: left;
+}
+/*#time-and-company label{
+    width: 100px;
+    text-align: center;
+}*/
+#time-and-company div{
+    width: 90%;
+    width: calc(100% - 100px);
+    float:right;
+}
+#time-and-company input{
+    width: 205px;
+    /*margin: auto;*/
+    display: block;
+    text-align: left;
+}
+.float-l{
+    float: left;
+}
+.float-r{
+    float: right;
+}
+.shadow{
+    -moz-box-shadow: inset 1px 1px 1px 0px #756B6B;
+    -webkit-box-shadow: inset 1px 1px 1px 0px #756B6B;
+    box-shadow: inset 1px 1px 1px 0px #756B6B;
+}
+.icon-fir, .icon-sec{
+    width:20px;
+    height:20px;
+    display: block;
+    float: right;
+    background: url('../../resource/easyui/themes/metro/images/modify.png') no-repeat center center;
+    background-size: 100% 100%;
+}

@@ -1,0 +1,201 @@
+.w-head{
+    height:40px;
+    line-height: 40px;
+    font-size:20px;
+}
+#w-select{
+    width:100%;
+    height:32px;
+    line-height: 32px;
+    margin:15px 0;
+    font-size:20px;
+}
+/*
+* 施肥明细情况记载表 样式设置
+*/
+#applyTable{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+    height:100%;
+}
+#applyTable td{
+    width:7%;
+    height:32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding: 3px;
+}
+#applyTable td .SmallInputt{
+    width: 87%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+    text-align: center;
+}
+.apply .SmallInputt{
+     width: 20%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+}
+#w-tableHead{
+    height:30px;
+    line-height: 30px;
+    font-size:15px;
+}
+#w-tableHead td{
+    width:33%;
+    text-align: right;
+}
+
+/*
+* 产量与施肥量汇总表 样式设置
+*/
+
+#outputTable{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+#outputTable td{
+    height:32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:3px;
+}
+#outputTable td .BigInputt{
+     width: 95%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+    text-align: center;
+}
+.output .SmallInputt{
+    width: 20%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+}
+#outputTable  .w-borderTop{
+    border-top:2px solid #dddad5;
+}
+
+
+/*
+    soilPhysical 土壤理性 样式设置
+*/
+.soilPhysical{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+.soilPhysical td{
+    /*width:5%;*/
+    height:32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:3px;
+}
+  .SmallInputp{
+    width: 86%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+}
+
+.soilPhysical .inputLeft{
+    text-align: center;
+}
+.soilPhysical .SmallInputpp{
+    width: 20%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+}
+.soilPhysicalTop .SmallInputp{
+    width: 20%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+}
+.soilPhysicalBottom td{
+    text-align: center;
+    height:32px;
+    text-align: center;
+    padding:3px;
+}
+
+
+/*
+    soilOrganism 土壤生物性 样式设置
+*/
+
+#soilOrganism{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+#soilOrganism td{
+    /*width:6%;*/
+    height:32px !important;
+    line-height: 32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:2px;
+}
+#soilOrganism input.Smallinput{
+    width:50px !important;
+}
+.tdWidth div{
+    display: inline-block;
+    width:100px !important;
+    text-align: center;
+}
+
+.soilPhysical .tdright{
+    text-align: right !important;
+    border-right:0;
+}
+.soilPhysical .tdRight{
+    text-align: left !important;
+}
+.soilPhysical .SmallInputppp{
+    width:95% ;
+}
+.soilPhysical .SmallInputppData{
+    width:50% ;
+}
+
+.soilPhysicallbottom .ddright{
+    text-align: right;
+}
+.soilPhysicallbottom .ddleft{
+    text-align: left;
+}
+
+.soilPhysicallbottom td{
+    height:32px !important;
+    line-height: 32px;
+}

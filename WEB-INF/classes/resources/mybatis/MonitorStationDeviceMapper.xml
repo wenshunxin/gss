@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="monitor_station_device" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.monitorstation.bean.MonitorStationDevice" >
+    <result column="external_station_sid" property="externalStationSid" jdbcType="VARCHAR" />
+    <result column="station_sid" property="stationSid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_num" property="deviceNum" jdbcType="VARCHAR" />
+    <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="port" property="port" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tcxt.gss.monitorstation.bean.MonitorStationDevice" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+   <sql id="Base_Column_List" >
+    external_station_sid,station_sid, station_code, device_name, device_num, device_type, token,ip,port,user_name,password
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="getDeviceBySn" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from monitor_station_device
+    where device_num = #{deviceNum,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getMonitorStationDevice" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from monitor_station_device
+    where station_sid = #{stationSid,jdbcType=INTEGER} and device_type=#{deviceType,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="queryMonitorStationDevice" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from monitor_station_device msd where 1=1 
+    <if test="stationCode!=null">
+		and msd.station_code = #{stationCode}
+	</if>
+  </select>
+  <insert id="insert" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationDevice" >
+    insert into monitor_station_device (external_station_sid, station_sid, station_code, 
+      device_name, device_num, device_type, 
+      token, ip, port, user_name, 
+      password, remark)
+    values (#{externalStationSid,jdbcType=VARCHAR}, #{stationSid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, 
+      #{deviceName,jdbcType=VARCHAR}, #{deviceNum,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationDevice" >
+    insert into monitor_station_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="externalStationSid != null" >
+        external_station_sid,
+      </if>
+      <if test="stationSid != null" >
+        station_sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="deviceName != null" >
+        device_name,
+      </if>
+      <if test="deviceNum != null" >
+        device_num,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="port != null" >
+        port,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="externalStationSid != null" >
+        #{externalStationSid,jdbcType=VARCHAR},
+      </if>
+      <if test="stationSid != null" >
+        #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceNum != null" >
+        #{deviceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

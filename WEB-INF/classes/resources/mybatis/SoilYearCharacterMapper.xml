@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="soil_year_character" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.soil.bean.SoilYearCharacter" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="station_sid" property="stationSid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="testing_start_date" property="testingStartDate" jdbcType="DATE" />
+    <result column="testing_end_date" property="testingEndDate" jdbcType="DATE" />
+    <result column="monitor_year" property="monitorYear" jdbcType="VARCHAR" />
+    <result column="sampling_address" property="samplingAddress" jdbcType="VARCHAR" />
+    <result column="sampling_date" property="samplingDate" jdbcType="TIMESTAMP" />
+    <result column="deal_type" property="dealType" jdbcType="INTEGER" />
+    <result column="topsoil_depth" property="topsoilDepth" jdbcType="VARCHAR" />
+    <result column="bulk_density" property="bulkDensity" jdbcType="REAL" />
+    <result column="ph" property="ph" jdbcType="REAL" />
+    <result column="organic_matter_content" property="organicMatterContent" jdbcType="REAL" />
+    <result column="n_content" property="nContent" jdbcType="REAL" />
+    <result column="effective_k_content" property="effectiveKContent" jdbcType="REAL" />
+    <result column="quick_acting_k_content" property="quickActingKContent" jdbcType="REAL" />
+    <result column="slow_acting_k_content" property="slowActingKContent" jdbcType="REAL" />
+    <result column="microorganism" property="microorganism" jdbcType="REAL" />
+    <result column="urease_activity" property="ureaseActivity" jdbcType="REAL" />
+    <result column="approval_user_name" property="approvalUserName" jdbcType="VARCHAR" />
+    <result column="approval_date" property="approvalDate" jdbcType="DATE" />
+    <result column="examine_user_name" property="examineUserName" jdbcType="VARCHAR" />
+    <result column="examine_date" property="examineDate" jdbcType="DATE" />
+    <result column="formation_user_name" property="formationUserName" jdbcType="VARCHAR" />
+    <result column="formation_date" property="formationDate" jdbcType="DATE" />
+    <result column="test_company" property="testCompany" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tcxt.gss.soil.bean.SoilYearCharacter" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, station_sid, station_code, testing_start_date, testing_end_date, monitor_year, 
+    sampling_address, sampling_date, deal_type, topsoil_depth, bulk_density, ph, organic_matter_content, 
+    n_content, effective_k_content, quick_acting_k_content, slow_acting_k_content, microorganism, 
+    urease_activity, approval_user_name, approval_date, examine_user_name, examine_date, 
+    formation_user_name, formation_date, test_company
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+   <select id="getSoilYearCharacter" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from soil_year_character
+    where station_sid = #{stationSid,jdbcType=INTEGER} and monitor_year = #{monitorYear,jdbcType=VARCHAR}
+  </select>
+   <select id="querySoilYearCharacter" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from soil_year_character
+  </select>
+  
+  <select id="getDatasByField" resultType="hashMap" parameterType="java.util.HashMap" >
+   select monitor_year,${fieldName} from soil_year_character where station_sid = #{stationSid,jdbcType=INTEGER} group by deal_type,monitor_year
+  </select>
+  
+  
+  <delete id="deleteSoilYearCharacter" parameterType="java.util.HashMap" >
+    delete from soil_year_character
+   where station_sid = #{stationSid,jdbcType=INTEGER} and monitor_year = #{monitorYear,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tcxt.gss.soil.bean.SoilYearCharacter" >
+    insert into soil_year_character (sid, station_sid, station_code, 
+      testing_start_date, testing_end_date, monitor_year, 
+      sampling_address, sampling_date, deal_type, 
+      topsoil_depth, bulk_density, ph, 
+      organic_matter_content, n_content, effective_k_content, 
+      quick_acting_k_content, slow_acting_k_content, microorganism, 
+      urease_activity, approval_user_name, approval_date, 
+      examine_user_name, examine_date, formation_user_name, 
+      formation_date, test_company, remark
+      )
+    values (#{sid,jdbcType=INTEGER}, #{stationSid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, 
+      #{testingStartDate,jdbcType=DATE}, #{testingEndDate,jdbcType=DATE}, #{monitorYear,jdbcType=VARCHAR}, 
+      #{samplingAddress,jdbcType=VARCHAR}, #{samplingDate,jdbcType=TIMESTAMP}, #{dealType,jdbcType=INTEGER}, 
+      #{topsoilDepth,jdbcType=REAL}, #{bulkDensity,jdbcType=REAL}, #{ph,jdbcType=REAL}, 
+      #{organicMatterContent,jdbcType=REAL}, #{nContent,jdbcType=REAL}, #{effectiveKContent,jdbcType=REAL}, 
+      #{quickActingKContent,jdbcType=REAL}, #{slowActingKContent,jdbcType=REAL}, #{microorganism,jdbcType=REAL}, 
+      #{ureaseActivity,jdbcType=REAL}, #{approvalUserName,jdbcType=VARCHAR}, #{approvalDate,jdbcType=DATE}, 
+      #{examineUserName,jdbcType=VARCHAR}, #{examineDate,jdbcType=DATE}, #{formationUserName,jdbcType=VARCHAR}, 
+      #{formationDate,jdbcType=DATE}, #{testCompany,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.soil.bean.SoilYearCharacter" >
+    insert into soil_year_character
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="stationSid != null" >
+        station_sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="testingStartDate != null" >
+        testing_start_date,
+      </if>
+      <if test="testingEndDate != null" >
+        testing_end_date,
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year,
+      </if>
+      <if test="samplingAddress != null" >
+        sampling_address,
+      </if>
+      <if test="samplingDate != null" >
+        sampling_date,
+      </if>
+      <if test="dealType != null" >
+        deal_type,
+      </if>
+      <if test="topsoilDepth != null" >
+        topsoil_depth,
+      </if>
+      <if test="bulkDensity != null" >
+        bulk_density,
+      </if>
+      <if test="ph != null" >
+        ph,
+      </if>
+      <if test="organicMatterContent != null" >
+        organic_matter_content,
+      </if>
+      <if test="nContent != null" >
+        n_content,
+      </if>
+      <if test="effectiveKContent != null" >
+        effective_k_content,
+      </if>
+      <if test="quickActingKContent != null" >
+        quick_acting_k_content,
+      </if>
+      <if test="slowActingKContent != null" >
+        slow_acting_k_content,
+      </if>
+      <if test="microorganism != null" >
+        microorganism,
+      </if>
+      <if test="ureaseActivity != null" >
+        urease_activity,
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name,
+      </if>
+      <if test="approvalDate != null" >
+        approval_date,
+      </if>
+      <if test="examineUserName != null" >
+        examine_user_name,
+      </if>
+      <if test="examineDate != null" >
+        examine_date,
+      </if>
+      <if test="formationUserName != null" >
+        formation_user_name,
+      </if>
+      <if test="formationDate != null" >
+        formation_date,
+      </if>
+      <if test="testCompany != null" >
+        test_company,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="stationSid != null" >
+        #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="testingStartDate != null" >
+        #{testingStartDate,jdbcType=DATE},
+      </if>
+      <if test="testingEndDate != null" >
+        #{testingEndDate,jdbcType=DATE},
+      </if>
+      <if test="monitorYear != null" >
+        #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingAddress != null" >
+        #{samplingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingDate != null" >
+        #{samplingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealType != null" >
+        #{dealType,jdbcType=INTEGER},
+      </if>
+      <if test="topsoilDepth != null" >
+        #{topsoilDepth,jdbcType=VARCHAR},
+      </if>
+      <if test="bulkDensity != null" >
+        #{bulkDensity,jdbcType=REAL},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=REAL},
+      </if>
+      <if test="organicMatterContent != null" >
+        #{organicMatterContent,jdbcType=REAL},
+      </if>
+      <if test="nContent != null" >
+        #{nContent,jdbcType=REAL},
+      </if>
+      <if test="effectiveKContent != null" >
+        #{effectiveKContent,jdbcType=REAL},
+      </if>
+      <if test="quickActingKContent != null" >
+        #{quickActingKContent,jdbcType=REAL},
+      </if>
+      <if test="slowActingKContent != null" >
+        #{slowActingKContent,jdbcType=REAL},
+      </if>
+      <if test="microorganism != null" >
+        #{microorganism,jdbcType=REAL},
+      </if>
+      <if test="ureaseActivity != null" >
+        #{ureaseActivity,jdbcType=REAL},
+      </if>
+      <if test="approvalUserName != null" >
+        #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null" >
+        #{approvalDate,jdbcType=DATE},
+      </if>
+      <if test="examineUserName != null" >
+        #{examineUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="examineDate != null" >
+        #{examineDate,jdbcType=DATE},
+      </if>
+      <if test="formationUserName != null" >
+        #{formationUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="formationDate != null" >
+        #{formationDate,jdbcType=DATE},
+      </if>
+      <if test="testCompany != null" >
+        #{testCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcxt.gss.soil.bean.SoilYearCharacter" >
+    update soil_year_character
+    <set >
+      <if test="stationSid != null" >
+        station_sid = #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="testingStartDate != null" >
+        testing_start_date = #{testingStartDate,jdbcType=DATE},
+      </if>
+      <if test="testingEndDate != null" >
+        testing_end_date = #{testingEndDate,jdbcType=DATE},
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingAddress != null" >
+        sampling_address = #{samplingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingDate != null" >
+        sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealType != null" >
+        deal_type = #{dealType,jdbcType=INTEGER},
+      </if>
+      <if test="topsoilDepth != null" >
+        topsoil_depth = #{topsoilDepth,jdbcType=VARCHAR},
+      </if>
+      <if test="bulkDensity != null" >
+        bulk_density = #{bulkDensity,jdbcType=REAL},
+      </if>
+      <if test="ph != null" >
+        ph = #{ph,jdbcType=REAL},
+      </if>
+      <if test="organicMatterContent != null" >
+        organic_matter_content = #{organicMatterContent,jdbcType=REAL},
+      </if>
+      <if test="nContent != null" >
+        n_content = #{nContent,jdbcType=REAL},
+      </if>
+      <if test="effectiveKContent != null" >
+        effective_k_content = #{effectiveKContent,jdbcType=REAL},
+      </if>
+      <if test="quickActingKContent != null" >
+        quick_acting_k_content = #{quickActingKContent,jdbcType=REAL},
+      </if>
+      <if test="slowActingKContent != null" >
+        slow_acting_k_content = #{slowActingKContent,jdbcType=REAL},
+      </if>
+      <if test="microorganism != null" >
+        microorganism = #{microorganism,jdbcType=REAL},
+      </if>
+      <if test="ureaseActivity != null" >
+        urease_activity = #{ureaseActivity,jdbcType=REAL},
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null" >
+        approval_date = #{approvalDate,jdbcType=DATE},
+      </if>
+      <if test="examineUserName != null" >
+        examine_user_name = #{examineUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="examineDate != null" >
+        examine_date = #{examineDate,jdbcType=DATE},
+      </if>
+      <if test="formationUserName != null" >
+        formation_user_name = #{formationUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="formationDate != null" >
+        formation_date = #{formationDate,jdbcType=DATE},
+      </if>
+      <if test="testCompany != null" >
+        test_company = #{testCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcxt.gss.soil.bean.SoilYearCharacter" >
+    update soil_year_character
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      testing_start_date = #{testingStartDate,jdbcType=DATE},
+      testing_end_date = #{testingEndDate,jdbcType=DATE},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      sampling_address = #{samplingAddress,jdbcType=VARCHAR},
+      sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      deal_type = #{dealType,jdbcType=INTEGER},
+      topsoil_depth = #{topsoilDepth,jdbcType=REAL},
+      bulk_density = #{bulkDensity,jdbcType=REAL},
+      ph = #{ph,jdbcType=REAL},
+      organic_matter_content = #{organicMatterContent,jdbcType=REAL},
+      n_content = #{nContent,jdbcType=REAL},
+      effective_k_content = #{effectiveKContent,jdbcType=REAL},
+      quick_acting_k_content = #{quickActingKContent,jdbcType=REAL},
+      slow_acting_k_content = #{slowActingKContent,jdbcType=REAL},
+      microorganism = #{microorganism,jdbcType=REAL},
+      urease_activity = #{ureaseActivity,jdbcType=REAL},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=DATE},
+      examine_user_name = #{examineUserName,jdbcType=VARCHAR},
+      examine_date = #{examineDate,jdbcType=DATE},
+      formation_user_name = #{formationUserName,jdbcType=VARCHAR},
+      formation_date = #{formationDate,jdbcType=DATE},
+      test_company = #{testCompany,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcxt.gss.soil.bean.SoilYearCharacter" >
+    update soil_year_character
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      testing_start_date = #{testingStartDate,jdbcType=DATE},
+      testing_end_date = #{testingEndDate,jdbcType=DATE},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      sampling_address = #{samplingAddress,jdbcType=VARCHAR},
+      sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      deal_type = #{dealType,jdbcType=INTEGER},
+      topsoil_depth = #{topsoilDepth,jdbcType=REAL},
+      bulk_density = #{bulkDensity,jdbcType=REAL},
+      ph = #{ph,jdbcType=REAL},
+      organic_matter_content = #{organicMatterContent,jdbcType=REAL},
+      n_content = #{nContent,jdbcType=REAL},
+      effective_k_content = #{effectiveKContent,jdbcType=REAL},
+      quick_acting_k_content = #{quickActingKContent,jdbcType=REAL},
+      slow_acting_k_content = #{slowActingKContent,jdbcType=REAL},
+      microorganism = #{microorganism,jdbcType=REAL},
+      urease_activity = #{ureaseActivity,jdbcType=REAL},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=DATE},
+      examine_user_name = #{examineUserName,jdbcType=VARCHAR},
+      examine_date = #{examineDate,jdbcType=DATE},
+      formation_user_name = #{formationUserName,jdbcType=VARCHAR},
+      formation_date = #{formationDate,jdbcType=DATE},
+      test_company = #{testCompany,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

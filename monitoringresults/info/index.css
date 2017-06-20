@@ -1,0 +1,150 @@
+.w-head{
+    height:40px;
+    line-height: 40px;
+    font-size:20px;
+}
+#w-select{
+    width:100%;
+    margin:15px 0;
+    font-size:20px;
+     appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: url("../../resource/easyui/themes/metro/images/xiala.png") no-repeat scroll 99% center transparent;
+}
+/*
+* 施肥明细情况记载表 样式设置
+*/
+#applyTable{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+    height:100%;
+}
+#applyTable td{
+    width:5%;
+    height:32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:3px;
+}
+
+#w-tableHead{
+    height:30px;
+    line-height: 30px;
+    font-size:15px;
+}
+#w-tableHead td{
+    width:33%;
+    text-align: right;
+}
+
+/*
+* 产量与施肥量汇总表 样式设置
+*/
+
+#outputTable{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+#outputTable td{
+    height:32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:3px;
+}
+#outputTable  .w-borderTop{
+    border-top:2px solid #dddad5;
+}
+
+
+/*
+    soilPhysical 土壤理性 样式设置
+*/
+#soilPhysical{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+#soilPhysical td{
+    width:5%;
+    height:32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:3px;
+}
+
+/*
+    soilOrganism 土壤生物性 样式设置
+*/
+
+#soilOrganism{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+#soilOrganism td{
+    /*width:6%;*/
+    height:32px !important;
+    line-height: 32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:2px;
+}
+#soilOrganism .trData span{
+    display: inline-block;
+    width:50px ;
+}
+.tdWidth div{
+    width:90px !important;
+    text-align: center;
+    display: inline-block;
+}
+
+#annualInfo{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+#annualInfo td{
+    /*width:6%;*/
+    height:32px !important;
+    line-height: 32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:2px;
+}
+
+.soilPhysicalBottom{
+    margin:10px 0 20px 0;
+}
+.soilPhysicalBottom td{
+    height:26px;
+    line-height: 26px;
+}
+
+.soilPhysicalBottom td.bottomr{
+    text-align:right;
+}
+.soilPhysicalBottom td.bottoml{
+    text-align:left;
+    width:20%;
+}
+
+
+
+#soilPhysical .ttleft{
+    text-align: right;
+    border-right:0;
+}
+#soilPhysical .ttLeft{
+    text-align: left;
+}
+#soilOrganism .tdleft{
+    text-align: right;
+    border-right:0;
+}
+#soilOrganism .tdLeft{
+    text-align: left;
+}

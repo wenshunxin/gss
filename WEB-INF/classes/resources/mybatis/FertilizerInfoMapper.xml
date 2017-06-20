@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fertilizer_info" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.fertilizer.bean.FertilizerInfo" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="station_sid" property="stationSid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="monitor_year" property="monitorYear" jdbcType="VARCHAR" />
+    <result column="fertilizer_date" property="fertilizerDate" jdbcType="DATE" />
+    <result column="organic_fertilizer_type_name" property="organicFertilizerTypeName" jdbcType="VARCHAR" />
+    <result column="organic_fertilizer_n_num" property="organicFertilizerNNum" jdbcType="REAL" />
+    <result column="organic_fertilizer_p2o5_num" property="organicFertilizerP2o5Num" jdbcType="REAL" />
+    <result column="organic_fertilizer_k2o_num" property="organicFertilizerK2oNum" jdbcType="REAL" />
+    <result column="organic_fertilizer_num" property="organicFertilizerNum" jdbcType="REAL" />
+    <result column="chemical_fertilize_type_name" property="chemicalFertilizeTypeName" jdbcType="VARCHAR" />
+    <result column="chemical_fertilize_n_num" property="chemicalFertilizeNNum" jdbcType="REAL" />
+    <result column="chemical_fertilize_p2o5_num" property="chemicalFertilizeP2o5Num" jdbcType="REAL" />
+    <result column="chemical_fertilize_k2o_num" property="chemicalFertilizeK2oNum" jdbcType="REAL" />
+    <result column="chemical_fertilize_num" property="chemicalFertilizeNum" jdbcType="REAL" />
+    <result column="fill_form_date" property="fillFormDate" jdbcType="DATE" />
+    <result column="fill_form_user_name" property="fillFormUserName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tcxt.gss.fertilizer.bean.FertilizerInfo" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, station_sid, station_code, monitor_year, fertilizer_date, organic_fertilizer_type_name, 
+    organic_fertilizer_n_num, organic_fertilizer_p2o5_num, organic_fertilizer_k2o_num, 
+    organic_fertilizer_num, chemical_fertilize_type_name, chemical_fertilize_n_num, chemical_fertilize_p2o5_num, 
+    chemical_fertilize_k2o_num, chemical_fertilize_num, fill_form_date, fill_form_user_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="getFertilizerInfo" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fertilizer_info
+    where station_sid = #{stationSid,jdbcType=INTEGER} and monitor_year = #{monitorYear,jdbcType=VARCHAR}
+  </select>
+  <select id="queryFertilizerInfo" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fertilizer_info
+  </select>
+  <delete id="deleteFertilizerInfo" parameterType="java.util.HashMap" >
+    delete from fertilizer_info
+    where station_sid = #{stationSid,jdbcType=INTEGER} and monitor_year = #{monitorYear,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tcxt.gss.fertilizer.bean.FertilizerInfo" >
+    insert into fertilizer_info (sid, station_sid, station_code, 
+      monitor_year, fertilizer_date, organic_fertilizer_type_name, 
+      organic_fertilizer_n_num, organic_fertilizer_p2o5_num, 
+      organic_fertilizer_k2o_num, organic_fertilizer_num, 
+      chemical_fertilize_type_name, chemical_fertilize_n_num, 
+      chemical_fertilize_p2o5_num, chemical_fertilize_k2o_num, 
+      chemical_fertilize_num, fill_form_date, fill_form_user_name, 
+      remark)
+    values (#{sid,jdbcType=INTEGER}, #{stationSid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, 
+      #{monitorYear,jdbcType=VARCHAR}, #{fertilizerDate,jdbcType=DATE}, #{organicFertilizerTypeName,jdbcType=VARCHAR}, 
+      #{organicFertilizerNNum,jdbcType=REAL}, #{organicFertilizerP2o5Num,jdbcType=REAL}, 
+      #{organicFertilizerK2oNum,jdbcType=REAL}, #{organicFertilizerNum,jdbcType=REAL}, 
+      #{chemicalFertilizeTypeName,jdbcType=VARCHAR}, #{chemicalFertilizeNNum,jdbcType=REAL}, 
+      #{chemicalFertilizeP2o5Num,jdbcType=REAL}, #{chemicalFertilizeK2oNum,jdbcType=REAL}, 
+      #{chemicalFertilizeNum,jdbcType=REAL}, #{fillFormDate,jdbcType=DATE}, #{fillFormUserName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.fertilizer.bean.FertilizerInfo" >
+    insert into fertilizer_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="stationSid != null" >
+        station_sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year,
+      </if>
+      <if test="fertilizerDate != null" >
+        fertilizer_date,
+      </if>
+      <if test="organicFertilizerTypeName != null" >
+        organic_fertilizer_type_name,
+      </if>
+      <if test="organicFertilizerNNum != null" >
+        organic_fertilizer_n_num,
+      </if>
+      <if test="organicFertilizerP2o5Num != null" >
+        organic_fertilizer_p2o5_num,
+      </if>
+      <if test="organicFertilizerK2oNum != null" >
+        organic_fertilizer_k2o_num,
+      </if>
+      <if test="organicFertilizerNum != null" >
+        organic_fertilizer_num,
+      </if>
+      <if test="chemicalFertilizeTypeName != null" >
+        chemical_fertilize_type_name,
+      </if>
+      <if test="chemicalFertilizeNNum != null" >
+        chemical_fertilize_n_num,
+      </if>
+      <if test="chemicalFertilizeP2o5Num != null" >
+        chemical_fertilize_p2o5_num,
+      </if>
+      <if test="chemicalFertilizeK2oNum != null" >
+        chemical_fertilize_k2o_num,
+      </if>
+      <if test="chemicalFertilizeNum != null" >
+        chemical_fertilize_num,
+      </if>
+      <if test="fillFormDate != null" >
+        fill_form_date,
+      </if>
+      <if test="fillFormUserName != null" >
+        fill_form_user_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="stationSid != null" >
+        #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorYear != null" >
+        #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="fertilizerDate != null" >
+        #{fertilizerDate,jdbcType=DATE},
+      </if>
+      <if test="organicFertilizerTypeName != null" >
+        #{organicFertilizerTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="organicFertilizerNNum != null" >
+        #{organicFertilizerNNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerP2o5Num != null" >
+        #{organicFertilizerP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerK2oNum != null" >
+        #{organicFertilizerK2oNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerNum != null" >
+        #{organicFertilizerNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeTypeName != null" >
+        #{chemicalFertilizeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="chemicalFertilizeNNum != null" >
+        #{chemicalFertilizeNNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeP2o5Num != null" >
+        #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeK2oNum != null" >
+        #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeNum != null" >
+        #{chemicalFertilizeNum,jdbcType=REAL},
+      </if>
+      <if test="fillFormDate != null" >
+        #{fillFormDate,jdbcType=DATE},
+      </if>
+      <if test="fillFormUserName != null" >
+        #{fillFormUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcxt.gss.fertilizer.bean.FertilizerInfo" >
+    update fertilizer_info
+    <set >
+      <if test="stationSid != null" >
+        station_sid = #{stationSid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorYear != null" >
+        monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      </if>
+      <if test="fertilizerDate != null" >
+        fertilizer_date = #{fertilizerDate,jdbcType=DATE},
+      </if>
+      <if test="organicFertilizerTypeName != null" >
+        organic_fertilizer_type_name = #{organicFertilizerTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="organicFertilizerNNum != null" >
+        organic_fertilizer_n_num = #{organicFertilizerNNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerP2o5Num != null" >
+        organic_fertilizer_p2o5_num = #{organicFertilizerP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerK2oNum != null" >
+        organic_fertilizer_k2o_num = #{organicFertilizerK2oNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerNum != null" >
+        organic_fertilizer_num = #{organicFertilizerNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeTypeName != null" >
+        chemical_fertilize_type_name = #{chemicalFertilizeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="chemicalFertilizeNNum != null" >
+        chemical_fertilize_n_num = #{chemicalFertilizeNNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeP2o5Num != null" >
+        chemical_fertilize_p2o5_num = #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeK2oNum != null" >
+        chemical_fertilize_k2o_num = #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeNum != null" >
+        chemical_fertilize_num = #{chemicalFertilizeNum,jdbcType=REAL},
+      </if>
+      <if test="fillFormDate != null" >
+        fill_form_date = #{fillFormDate,jdbcType=DATE},
+      </if>
+      <if test="fillFormUserName != null" >
+        fill_form_user_name = #{fillFormUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcxt.gss.fertilizer.bean.FertilizerInfo" >
+    update fertilizer_info
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      fertilizer_date = #{fertilizerDate,jdbcType=DATE},
+      organic_fertilizer_type_name = #{organicFertilizerTypeName,jdbcType=VARCHAR},
+      organic_fertilizer_n_num = #{organicFertilizerNNum,jdbcType=REAL},
+      organic_fertilizer_p2o5_num = #{organicFertilizerP2o5Num,jdbcType=REAL},
+      organic_fertilizer_k2o_num = #{organicFertilizerK2oNum,jdbcType=REAL},
+      organic_fertilizer_num = #{organicFertilizerNum,jdbcType=REAL},
+      chemical_fertilize_type_name = #{chemicalFertilizeTypeName,jdbcType=VARCHAR},
+      chemical_fertilize_n_num = #{chemicalFertilizeNNum,jdbcType=REAL},
+      chemical_fertilize_p2o5_num = #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      chemical_fertilize_k2o_num = #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      chemical_fertilize_num = #{chemicalFertilizeNum,jdbcType=REAL},
+      fill_form_date = #{fillFormDate,jdbcType=DATE},
+      fill_form_user_name = #{fillFormUserName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcxt.gss.fertilizer.bean.FertilizerInfo" >
+    update fertilizer_info
+    set station_sid = #{stationSid,jdbcType=INTEGER},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      monitor_year = #{monitorYear,jdbcType=VARCHAR},
+      fertilizer_date = #{fertilizerDate,jdbcType=DATE},
+      organic_fertilizer_type_name = #{organicFertilizerTypeName,jdbcType=VARCHAR},
+      organic_fertilizer_n_num = #{organicFertilizerNNum,jdbcType=REAL},
+      organic_fertilizer_p2o5_num = #{organicFertilizerP2o5Num,jdbcType=REAL},
+      organic_fertilizer_k2o_num = #{organicFertilizerK2oNum,jdbcType=REAL},
+      organic_fertilizer_num = #{organicFertilizerNum,jdbcType=REAL},
+      chemical_fertilize_type_name = #{chemicalFertilizeTypeName,jdbcType=VARCHAR},
+      chemical_fertilize_n_num = #{chemicalFertilizeNNum,jdbcType=REAL},
+      chemical_fertilize_p2o5_num = #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      chemical_fertilize_k2o_num = #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      chemical_fertilize_num = #{chemicalFertilizeNum,jdbcType=REAL},
+      fill_form_date = #{fillFormDate,jdbcType=DATE},
+      fill_form_user_name = #{fillFormUserName,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nutrient_diagnosis" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.nutrientdiagnosis.bean.NutrientDiagnosis" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="ndvi" property="ndvi" jdbcType="VARCHAR" />
+    <result column="lai" property="lai" jdbcType="VARCHAR" />
+    <result column="fvc" property="fvc" jdbcType="VARCHAR" />
+    <result column="cab" property="cab" jdbcType="VARCHAR" />
+    <result column="yield" property="yield" jdbcType="VARCHAR" />
+    <result column="nc" property="nc" jdbcType="VARCHAR" />
+    <result column="bat" property="bat" jdbcType="VARCHAR" />
+    <result column="wd" property="wd" jdbcType="VARCHAR" />
+    <result column="jd" property="jd" jdbcType="VARCHAR" />
+    <result column="high" property="high" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List" >
+    id, addr, number, time, ndvi, lai, fvc, cab, yield, nc, bat, wd, jd, high
+  </sql>
+   <select id="queryNutrientDiagnosis" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from nutrient_diagnosis where 1=1
+     <if test="startDate !='' and endDate !=''">
+		 and time  between STR_TO_DATE
+('${startDate}','%Y-%m-%d %H:%i:%s') and STR_TO_DATE('${endDate}','%Y-%m-%d %H:%i:%s') 
+	 </if>  
+	 <if test="sort!=''">
+		order by ${sort}
+		<if test="order!=''">
+			${order}
+		</if>
+	</if>
+   </select>
+</mapper>

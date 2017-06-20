@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="monitor_station_info" >
+  <resultMap id="BaseResultMap" type="com.tcxt.gss.monitorstation.bean.MonitorStationInfo" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="soil_category" property="soilCategory" jdbcType="VARCHAR" />
+    <result column="building_date" property="buildingDate" jdbcType="VARCHAR" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="county_name" property="countyName" jdbcType="VARCHAR" />
+    <result column="township_name" property="townshipName" jdbcType="VARCHAR" />
+    <result column="village_name" property="villageName" jdbcType="VARCHAR" />
+    <result column="massif_name" property="massifName" jdbcType="VARCHAR" />
+    <result column="county_code" property="countyCode" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="annual_precipitation" property="annualPrecipitation" jdbcType="REAL" />
+    <result column="annual_effective_temperature" property="annualEffectiveTemperature" jdbcType="REAL" />
+    <result column="annual_no_frost_days" property="annualNoFrostDays" jdbcType="REAL" />
+    <result column="terrain_position" property="terrainPosition" jdbcType="VARCHAR" />
+    <result column="massif_slope" property="massifSlope" jdbcType="REAL" />
+    <result column="altitude" property="altitude" jdbcType="REAL" />
+    <result column="diving_depth" property="divingDepth" jdbcType="REAL" />
+    <result column="obstacle_factor" property="obstacleFactor" jdbcType="VARCHAR" />
+    <result column="soil_fertility_level" property="soilFertilityLevel" jdbcType="VARCHAR" />
+    <result column="irrigation_capacity" property="irrigationCapacity" jdbcType="VARCHAR" />
+    <result column="drainage_capacity" property="drainageCapacity" jdbcType="VARCHAR" />
+    <result column="region_division" property="regionDivision" jdbcType="VARCHAR" />
+    <result column="cooked_division" property="cookedDivision" jdbcType="VARCHAR" />
+    <result column="plant_rule" property="plantRule" jdbcType="VARCHAR" />
+    <result column="yield_level" property="yieldLevel" jdbcType="REAL" />
+    <result column="chemical_fertilize_n_num" property="chemicalFertilizeNNum" jdbcType="REAL" />
+    <result column="chemical_fertilize_p2o5_num" property="chemicalFertilizeP2o5Num" jdbcType="REAL" />
+    <result column="chemical_fertilize_k2o_num" property="chemicalFertilizeK2oNum" jdbcType="REAL" />
+    <result column="organic_fertilizer_n_num" property="organicFertilizerNNum" jdbcType="REAL" />
+    <result column="organic_fertilizer_p2o5_num" property="organicFertilizerP2o5Num" jdbcType="REAL" />
+    <result column="organic_fertilizer_k2o_num" property="organicFertilizerK2oNum" jdbcType="REAL" />
+    <result column="field_area" property="fieldArea" jdbcType="REAL" />
+    <result column="representative_area" property="representativeArea" jdbcType="REAL" />
+    <result column="soil_code" property="soilCode" jdbcType="VARCHAR" />
+    <result column="parent_material" property="parentMaterial" jdbcType="VARCHAR" />
+    <result column="soil_type" property="soilType" jdbcType="VARCHAR" />
+    <result column="subclass" property="subclass" jdbcType="VARCHAR" />
+    <result column="soil_genus" property="soilGenus" jdbcType="VARCHAR" />
+    <result column="soil_species" property="soilSpecies" jdbcType="VARCHAR" />
+    <result column="landscape_shot_time" property="landscapeShotTime" jdbcType="TIMESTAMP" />
+    <result column="profile_shot_time" property="profileShotTime" jdbcType="TIMESTAMP" />
+    <result column="monitor_company" property="monitorCompany" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tcxt.gss.monitorstation.bean.MonitorStationInfo" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, station_code, soil_category, building_date, province_name, city_name, county_name, 
+    township_name, village_name, massif_name, county_code, longitude, latitude, annual_precipitation, 
+    annual_effective_temperature, annual_no_frost_days, terrain_position, massif_slope, 
+    altitude, diving_depth, obstacle_factor, soil_fertility_level, irrigation_capacity, 
+    drainage_capacity, region_division, cooked_division, plant_rule, yield_level, chemical_fertilize_n_num, 
+    chemical_fertilize_p2o5_num, chemical_fertilize_k2o_num, organic_fertilizer_n_num, 
+    organic_fertilizer_p2o5_num, organic_fertilizer_k2o_num, field_area, representative_area, 
+    soil_code, parent_material, soil_type, subclass, soil_genus, soil_species, landscape_shot_time, 
+    profile_shot_time, monitor_company, create_user_id, create_user_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from monitor_station_info
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+    <select id="queryMonitorStationInfo" resultMap="ResultMapWithBLOBs" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from monitor_station_info msi where 1=1 and create_user_id = #{userId,jdbcType=INTEGER}
+    <if test="stationCode!=null">
+			and msi.station_code like '%${stationCode}%'
+		</if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from monitor_station_info
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationInfo" >
+    insert into monitor_station_info (sid, station_code, soil_category, 
+      building_date, province_name, city_name, 
+      county_name, township_name, village_name, 
+      massif_name, county_code, longitude, 
+      latitude, annual_precipitation, annual_effective_temperature, 
+      annual_no_frost_days, terrain_position, massif_slope, 
+      altitude, diving_depth, obstacle_factor, 
+      soil_fertility_level, irrigation_capacity, 
+      drainage_capacity, region_division, cooked_division, 
+      plant_rule, yield_level, chemical_fertilize_n_num, 
+      chemical_fertilize_p2o5_num, chemical_fertilize_k2o_num, 
+      organic_fertilizer_n_num, organic_fertilizer_p2o5_num, 
+      organic_fertilizer_k2o_num, field_area, representative_area, 
+      soil_code, parent_material, soil_type, 
+      subclass, soil_genus, soil_species, 
+      landscape_shot_time, profile_shot_time, 
+      monitor_company, create_user_id, create_user_name, 
+      remark)
+    values (#{sid,jdbcType=INTEGER}, #{stationCode,jdbcType=VARCHAR}, #{soilCategory,jdbcType=VARCHAR}, 
+      #{buildingDate,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
+      #{countyName,jdbcType=VARCHAR}, #{townshipName,jdbcType=VARCHAR}, #{villageName,jdbcType=VARCHAR}, 
+      #{massifName,jdbcType=VARCHAR}, #{countyCode,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{annualPrecipitation,jdbcType=REAL}, #{annualEffectiveTemperature,jdbcType=REAL}, 
+      #{annualNoFrostDays,jdbcType=REAL}, #{terrainPosition,jdbcType=VARCHAR}, #{massifSlope,jdbcType=REAL}, 
+      #{altitude,jdbcType=REAL}, #{divingDepth,jdbcType=REAL}, #{obstacleFactor,jdbcType=VARCHAR}, 
+      #{soilFertilityLevel,jdbcType=VARCHAR}, #{irrigationCapacity,jdbcType=VARCHAR}, 
+      #{drainageCapacity,jdbcType=VARCHAR}, #{regionDivision,jdbcType=VARCHAR}, #{cookedDivision,jdbcType=VARCHAR}, 
+      #{plantRule,jdbcType=VARCHAR}, #{yieldLevel,jdbcType=REAL}, #{chemicalFertilizeNNum,jdbcType=REAL}, 
+      #{chemicalFertilizeP2o5Num,jdbcType=REAL}, #{chemicalFertilizeK2oNum,jdbcType=REAL}, 
+      #{organicFertilizerNNum,jdbcType=REAL}, #{organicFertilizerP2o5Num,jdbcType=REAL}, 
+      #{organicFertilizerK2oNum,jdbcType=REAL}, #{fieldArea,jdbcType=REAL}, #{representativeArea,jdbcType=REAL}, 
+      #{soilCode,jdbcType=VARCHAR}, #{parentMaterial,jdbcType=VARCHAR}, #{soilType,jdbcType=VARCHAR}, 
+      #{subclass,jdbcType=VARCHAR}, #{soilGenus,jdbcType=VARCHAR}, #{soilSpecies,jdbcType=VARCHAR}, 
+      #{landscapeShotTime,jdbcType=TIMESTAMP}, #{profileShotTime,jdbcType=TIMESTAMP}, 
+      #{monitorCompany,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationInfo" useGeneratedKeys="true" keyProperty="sid">
+    insert into monitor_station_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="soilCategory != null" >
+        soil_category,
+      </if>
+      <if test="buildingDate != null" >
+        building_date,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="countyName != null" >
+        county_name,
+      </if>
+      <if test="townshipName != null" >
+        township_name,
+      </if>
+      <if test="villageName != null" >
+        village_name,
+      </if>
+      <if test="massifName != null" >
+        massif_name,
+      </if>
+      <if test="countyCode != null" >
+        county_code,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="annualPrecipitation != null" >
+        annual_precipitation,
+      </if>
+      <if test="annualEffectiveTemperature != null" >
+        annual_effective_temperature,
+      </if>
+      <if test="annualNoFrostDays != null" >
+        annual_no_frost_days,
+      </if>
+      <if test="terrainPosition != null" >
+        terrain_position,
+      </if>
+      <if test="massifSlope != null" >
+        massif_slope,
+      </if>
+      <if test="altitude != null" >
+        altitude,
+      </if>
+      <if test="divingDepth != null" >
+        diving_depth,
+      </if>
+      <if test="obstacleFactor != null" >
+        obstacle_factor,
+      </if>
+      <if test="soilFertilityLevel != null" >
+        soil_fertility_level,
+      </if>
+      <if test="irrigationCapacity != null" >
+        irrigation_capacity,
+      </if>
+      <if test="drainageCapacity != null" >
+        drainage_capacity,
+      </if>
+      <if test="regionDivision != null" >
+        region_division,
+      </if>
+      <if test="cookedDivision != null" >
+        cooked_division,
+      </if>
+      <if test="plantRule != null" >
+        plant_rule,
+      </if>
+      <if test="yieldLevel != null" >
+        yield_level,
+      </if>
+      <if test="chemicalFertilizeNNum != null" >
+        chemical_fertilize_n_num,
+      </if>
+      <if test="chemicalFertilizeP2o5Num != null" >
+        chemical_fertilize_p2o5_num,
+      </if>
+      <if test="chemicalFertilizeK2oNum != null" >
+        chemical_fertilize_k2o_num,
+      </if>
+      <if test="organicFertilizerNNum != null" >
+        organic_fertilizer_n_num,
+      </if>
+      <if test="organicFertilizerP2o5Num != null" >
+        organic_fertilizer_p2o5_num,
+      </if>
+      <if test="organicFertilizerK2oNum != null" >
+        organic_fertilizer_k2o_num,
+      </if>
+      <if test="fieldArea != null" >
+        field_area,
+      </if>
+      <if test="representativeArea != null" >
+        representative_area,
+      </if>
+      <if test="soilCode != null" >
+        soil_code,
+      </if>
+      <if test="parentMaterial != null" >
+        parent_material,
+      </if>
+      <if test="soilType != null" >
+        soil_type,
+      </if>
+      <if test="subclass != null" >
+        subclass,
+      </if>
+      <if test="soilGenus != null" >
+        soil_genus,
+      </if>
+      <if test="soilSpecies != null" >
+        soil_species,
+      </if>
+      <if test="landscapeShotTime != null" >
+        landscape_shot_time,
+      </if>
+      <if test="profileShotTime != null" >
+        profile_shot_time,
+      </if>
+      <if test="monitorCompany != null" >
+        monitor_company,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createUserName != null" >
+        create_user_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="soilCategory != null" >
+        #{soilCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingDate != null" >
+        #{buildingDate,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyName != null" >
+        #{countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipName != null" >
+        #{townshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="villageName != null" >
+        #{villageName,jdbcType=VARCHAR},
+      </if>
+      <if test="massifName != null" >
+        #{massifName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null" >
+        #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="annualPrecipitation != null" >
+        #{annualPrecipitation,jdbcType=REAL},
+      </if>
+      <if test="annualEffectiveTemperature != null" >
+        #{annualEffectiveTemperature,jdbcType=REAL},
+      </if>
+      <if test="annualNoFrostDays != null" >
+        #{annualNoFrostDays,jdbcType=REAL},
+      </if>
+      <if test="terrainPosition != null" >
+        #{terrainPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="massifSlope != null" >
+        #{massifSlope,jdbcType=REAL},
+      </if>
+      <if test="altitude != null" >
+        #{altitude,jdbcType=REAL},
+      </if>
+      <if test="divingDepth != null" >
+        #{divingDepth,jdbcType=REAL},
+      </if>
+      <if test="obstacleFactor != null" >
+        #{obstacleFactor,jdbcType=VARCHAR},
+      </if>
+      <if test="soilFertilityLevel != null" >
+        #{soilFertilityLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="irrigationCapacity != null" >
+        #{irrigationCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="drainageCapacity != null" >
+        #{drainageCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="regionDivision != null" >
+        #{regionDivision,jdbcType=VARCHAR},
+      </if>
+      <if test="cookedDivision != null" >
+        #{cookedDivision,jdbcType=VARCHAR},
+      </if>
+      <if test="plantRule != null" >
+        #{plantRule,jdbcType=VARCHAR},
+      </if>
+      <if test="yieldLevel != null" >
+        #{yieldLevel,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeNNum != null" >
+        #{chemicalFertilizeNNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeP2o5Num != null" >
+        #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeK2oNum != null" >
+        #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerNNum != null" >
+        #{organicFertilizerNNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerP2o5Num != null" >
+        #{organicFertilizerP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerK2oNum != null" >
+        #{organicFertilizerK2oNum,jdbcType=REAL},
+      </if>
+      <if test="fieldArea != null" >
+        #{fieldArea,jdbcType=REAL},
+      </if>
+      <if test="representativeArea != null" >
+        #{representativeArea,jdbcType=REAL},
+      </if>
+      <if test="soilCode != null" >
+        #{soilCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMaterial != null" >
+        #{parentMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="soilType != null" >
+        #{soilType,jdbcType=VARCHAR},
+      </if>
+      <if test="subclass != null" >
+        #{subclass,jdbcType=VARCHAR},
+      </if>
+      <if test="soilGenus != null" >
+        #{soilGenus,jdbcType=VARCHAR},
+      </if>
+      <if test="soilSpecies != null" >
+        #{soilSpecies,jdbcType=VARCHAR},
+      </if>
+      <if test="landscapeShotTime != null" >
+        #{landscapeShotTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="profileShotTime != null" >
+        #{profileShotTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorCompany != null" >
+        #{monitorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserName != null" >
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationInfo" >
+    update monitor_station_info
+    <set >
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="soilCategory != null" >
+        soil_category = #{soilCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingDate != null" >
+        building_date = #{buildingDate,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyName != null" >
+        county_name = #{countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipName != null" >
+        township_name = #{townshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="villageName != null" >
+        village_name = #{villageName,jdbcType=VARCHAR},
+      </if>
+      <if test="massifName != null" >
+        massif_name = #{massifName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null" >
+        county_code = #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="annualPrecipitation != null" >
+        annual_precipitation = #{annualPrecipitation,jdbcType=REAL},
+      </if>
+      <if test="annualEffectiveTemperature != null" >
+        annual_effective_temperature = #{annualEffectiveTemperature,jdbcType=REAL},
+      </if>
+      <if test="annualNoFrostDays != null" >
+        annual_no_frost_days = #{annualNoFrostDays,jdbcType=REAL},
+      </if>
+      <if test="terrainPosition != null" >
+        terrain_position = #{terrainPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="massifSlope != null" >
+        massif_slope = #{massifSlope,jdbcType=REAL},
+      </if>
+      <if test="altitude != null" >
+        altitude = #{altitude,jdbcType=REAL},
+      </if>
+      <if test="divingDepth != null" >
+        diving_depth = #{divingDepth,jdbcType=REAL},
+      </if>
+      <if test="obstacleFactor != null" >
+        obstacle_factor = #{obstacleFactor,jdbcType=VARCHAR},
+      </if>
+      <if test="soilFertilityLevel != null" >
+        soil_fertility_level = #{soilFertilityLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="irrigationCapacity != null" >
+        irrigation_capacity = #{irrigationCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="drainageCapacity != null" >
+        drainage_capacity = #{drainageCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="regionDivision != null" >
+        region_division = #{regionDivision,jdbcType=VARCHAR},
+      </if>
+      <if test="cookedDivision != null" >
+        cooked_division = #{cookedDivision,jdbcType=VARCHAR},
+      </if>
+      <if test="plantRule != null" >
+        plant_rule = #{plantRule,jdbcType=VARCHAR},
+      </if>
+      <if test="yieldLevel != null" >
+        yield_level = #{yieldLevel,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeNNum != null" >
+        chemical_fertilize_n_num = #{chemicalFertilizeNNum,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeP2o5Num != null" >
+        chemical_fertilize_p2o5_num = #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="chemicalFertilizeK2oNum != null" >
+        chemical_fertilize_k2o_num = #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerNNum != null" >
+        organic_fertilizer_n_num = #{organicFertilizerNNum,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerP2o5Num != null" >
+        organic_fertilizer_p2o5_num = #{organicFertilizerP2o5Num,jdbcType=REAL},
+      </if>
+      <if test="organicFertilizerK2oNum != null" >
+        organic_fertilizer_k2o_num = #{organicFertilizerK2oNum,jdbcType=REAL},
+      </if>
+      <if test="fieldArea != null" >
+        field_area = #{fieldArea,jdbcType=REAL},
+      </if>
+      <if test="representativeArea != null" >
+        representative_area = #{representativeArea,jdbcType=REAL},
+      </if>
+      <if test="soilCode != null" >
+        soil_code = #{soilCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMaterial != null" >
+        parent_material = #{parentMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="soilType != null" >
+        soil_type = #{soilType,jdbcType=VARCHAR},
+      </if>
+      <if test="subclass != null" >
+        subclass = #{subclass,jdbcType=VARCHAR},
+      </if>
+      <if test="soilGenus != null" >
+        soil_genus = #{soilGenus,jdbcType=VARCHAR},
+      </if>
+      <if test="soilSpecies != null" >
+        soil_species = #{soilSpecies,jdbcType=VARCHAR},
+      </if>
+      <if test="landscapeShotTime != null" >
+        landscape_shot_time = #{landscapeShotTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="profileShotTime != null" >
+        profile_shot_time = #{profileShotTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorCompany != null" >
+        monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationInfo" >
+    update monitor_station_info
+    set station_code = #{stationCode,jdbcType=VARCHAR},
+      soil_category = #{soilCategory,jdbcType=VARCHAR},
+      building_date = #{buildingDate,jdbcType=VARCHAR},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      county_name = #{countyName,jdbcType=VARCHAR},
+      township_name = #{townshipName,jdbcType=VARCHAR},
+      village_name = #{villageName,jdbcType=VARCHAR},
+      massif_name = #{massifName,jdbcType=VARCHAR},
+      county_code = #{countyCode,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      annual_precipitation = #{annualPrecipitation,jdbcType=REAL},
+      annual_effective_temperature = #{annualEffectiveTemperature,jdbcType=REAL},
+      annual_no_frost_days = #{annualNoFrostDays,jdbcType=REAL},
+      terrain_position = #{terrainPosition,jdbcType=VARCHAR},
+      massif_slope = #{massifSlope,jdbcType=REAL},
+      altitude = #{altitude,jdbcType=REAL},
+      diving_depth = #{divingDepth,jdbcType=REAL},
+      obstacle_factor = #{obstacleFactor,jdbcType=VARCHAR},
+      soil_fertility_level = #{soilFertilityLevel,jdbcType=VARCHAR},
+      irrigation_capacity = #{irrigationCapacity,jdbcType=VARCHAR},
+      drainage_capacity = #{drainageCapacity,jdbcType=VARCHAR},
+      region_division = #{regionDivision,jdbcType=VARCHAR},
+      cooked_division = #{cookedDivision,jdbcType=VARCHAR},
+      plant_rule = #{plantRule,jdbcType=VARCHAR},
+      yield_level = #{yieldLevel,jdbcType=REAL},
+      chemical_fertilize_n_num = #{chemicalFertilizeNNum,jdbcType=REAL},
+      chemical_fertilize_p2o5_num = #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      chemical_fertilize_k2o_num = #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      organic_fertilizer_n_num = #{organicFertilizerNNum,jdbcType=REAL},
+      organic_fertilizer_p2o5_num = #{organicFertilizerP2o5Num,jdbcType=REAL},
+      organic_fertilizer_k2o_num = #{organicFertilizerK2oNum,jdbcType=REAL},
+      field_area = #{fieldArea,jdbcType=REAL},
+      representative_area = #{representativeArea,jdbcType=REAL},
+      soil_code = #{soilCode,jdbcType=VARCHAR},
+      parent_material = #{parentMaterial,jdbcType=VARCHAR},
+      soil_type = #{soilType,jdbcType=VARCHAR},
+      subclass = #{subclass,jdbcType=VARCHAR},
+      soil_genus = #{soilGenus,jdbcType=VARCHAR},
+      soil_species = #{soilSpecies,jdbcType=VARCHAR},
+      landscape_shot_time = #{landscapeShotTime,jdbcType=TIMESTAMP},
+      profile_shot_time = #{profileShotTime,jdbcType=TIMESTAMP},
+      monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_user_name = #{createUserName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcxt.gss.monitorstation.bean.MonitorStationInfo" >
+    update monitor_station_info
+    set station_code = #{stationCode,jdbcType=VARCHAR},
+      soil_category = #{soilCategory,jdbcType=VARCHAR},
+      building_date = #{buildingDate,jdbcType=VARCHAR},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      county_name = #{countyName,jdbcType=VARCHAR},
+      township_name = #{townshipName,jdbcType=VARCHAR},
+      village_name = #{villageName,jdbcType=VARCHAR},
+      massif_name = #{massifName,jdbcType=VARCHAR},
+      county_code = #{countyCode,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      annual_precipitation = #{annualPrecipitation,jdbcType=REAL},
+      annual_effective_temperature = #{annualEffectiveTemperature,jdbcType=REAL},
+      annual_no_frost_days = #{annualNoFrostDays,jdbcType=REAL},
+      terrain_position = #{terrainPosition,jdbcType=VARCHAR},
+      massif_slope = #{massifSlope,jdbcType=REAL},
+      altitude = #{altitude,jdbcType=REAL},
+      diving_depth = #{divingDepth,jdbcType=REAL},
+      obstacle_factor = #{obstacleFactor,jdbcType=VARCHAR},
+      soil_fertility_level = #{soilFertilityLevel,jdbcType=VARCHAR},
+      irrigation_capacity = #{irrigationCapacity,jdbcType=VARCHAR},
+      drainage_capacity = #{drainageCapacity,jdbcType=VARCHAR},
+      region_division = #{regionDivision,jdbcType=VARCHAR},
+      cooked_division = #{cookedDivision,jdbcType=VARCHAR},
+      plant_rule = #{plantRule,jdbcType=VARCHAR},
+      yield_level = #{yieldLevel,jdbcType=REAL},
+      chemical_fertilize_n_num = #{chemicalFertilizeNNum,jdbcType=REAL},
+      chemical_fertilize_p2o5_num = #{chemicalFertilizeP2o5Num,jdbcType=REAL},
+      chemical_fertilize_k2o_num = #{chemicalFertilizeK2oNum,jdbcType=REAL},
+      organic_fertilizer_n_num = #{organicFertilizerNNum,jdbcType=REAL},
+      organic_fertilizer_p2o5_num = #{organicFertilizerP2o5Num,jdbcType=REAL},
+      organic_fertilizer_k2o_num = #{organicFertilizerK2oNum,jdbcType=REAL},
+      field_area = #{fieldArea,jdbcType=REAL},
+      representative_area = #{representativeArea,jdbcType=REAL},
+      soil_code = #{soilCode,jdbcType=VARCHAR},
+      parent_material = #{parentMaterial,jdbcType=VARCHAR},
+      soil_type = #{soilType,jdbcType=VARCHAR},
+      subclass = #{subclass,jdbcType=VARCHAR},
+      soil_genus = #{soilGenus,jdbcType=VARCHAR},
+      soil_species = #{soilSpecies,jdbcType=VARCHAR},
+      landscape_shot_time = #{landscapeShotTime,jdbcType=TIMESTAMP},
+      profile_shot_time = #{profileShotTime,jdbcType=TIMESTAMP},
+      monitor_company = #{monitorCompany,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_user_name = #{createUserName,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

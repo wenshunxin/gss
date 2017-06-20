@@ -1,0 +1,108 @@
+/*
+    soilOrganism 土壤生物性 样式设置
+*/
+.soilOrganismTop .SmallInputt{
+    width: 25%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+
+}
+.soilOrganism{
+    border-top:1px solid #dddad5;
+    border-left:1px solid #dddad5;
+}
+.soilOrganism td{
+    width:6%;
+    height:32px !important;
+    line-height: 32px;
+    text-align: center;
+    border-bottom:1px solid #dddad5;
+    border-right:1px solid #dddad5;
+    padding:2px;
+}
+.soilOrganism td.tdLeft{
+
+    text-align: left !important;
+
+}
+.soilOrganism .SmallInputt{
+    width: 82%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+    text-align: center;
+}
+.soilOrganism .SmallInputtt{
+    width: 30%;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 5px 0 5px;
+    color: #555555;
+    border:0;
+    text-align: center;
+}
+.soilOrganism .SmallInputttt{
+    width: 50%;
+}
+
+.soilPhysicallbottom td{
+    height:32px !important;
+    line-height: 32px;
+}
+
+
+.breadcrumb > li + li:before {
+    color: #CCCCCC;
+    content: "> ";
+    padding: 0 5px;
+}
+.breadcrumb{
+    background:#fff;
+    padding:10px 0;
+    margin:5px 0;
+}
+.w-head{
+    height:40px;
+    line-height: 40px;
+    font-size:20px;
+    margin-bottom:20px;
+}
+.soilPhysicall td{
+    /*width:5%;*/
+    height:32px;
+    text-align: center;
+    padding:3px;
+}
+.tdWidth div{
+    width:100px !important;
+    display: inline-block;
+    text-align: center;
+}
+ .soilOrganism .SmallInputttw{
+    width:95% ;
+}
+.soilOrganism .tdright{
+    text-align: right;
+    border-right:0;
+}
+.soilOrganism .tdRight{
+    text-align: left;
+}
+/*.soilOrganism .tdRight input{
+    text-align: left;
+}*/
+
+.soilPhysicallbottom .ddright{
+    text-align: right;
+}
+.soilPhysicallbottom .ddleft{
+    text-align: left;
+}
