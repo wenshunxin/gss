@@ -48,9 +48,11 @@
                     }else if($(this).val()=="4"){
                         $("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/soilOrganism.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
                     }else if($(this).val()=="5"){
-                        $("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/annualInformation.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
+                        $("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/annualStatistics.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
+                       //$("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/annualInformation.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
                     }else if($(this).val()=="6"){
-                        $("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/fiveannualInformation.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
+                        $("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/fiveYearStatistics.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
+                       // $("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/fiveannualInformation.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
                     }else{
                         $("#mainFrame").attr("src","<%=contextPath %>/monitoringresults/info/Monpro.jsp?stationCode=<%=stationCode%>&sid=<%=sid%>")
                     }
